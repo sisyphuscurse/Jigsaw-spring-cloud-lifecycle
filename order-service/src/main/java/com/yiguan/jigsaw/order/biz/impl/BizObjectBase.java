@@ -13,7 +13,6 @@ import java.util.Optional;
 public class BizObjectBase<B extends BizObjectBase<B, E, K>, E, K extends Serializable> {
   @Autowired
   private ModelMapper mapper;
-  @Autowired
   protected CrudRepository<E, K> repository;
   protected E internalState;
   private Optional<K> key;
