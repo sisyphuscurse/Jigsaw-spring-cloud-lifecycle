@@ -11,8 +11,7 @@ import java.io.Serializable;
 import java.util.Optional;
 
 public class BizObjectBase<B extends BizObjectBase<B, E, K>, E, K extends Serializable> {
-  @Autowired
-  private ModelMapper mapper;
+  private static final ModelMapper mapper = new ModelMapper();
   protected CrudRepository<E, K> repository;
   protected E internalState;
   private Optional<K> key;

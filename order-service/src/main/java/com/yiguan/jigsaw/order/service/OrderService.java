@@ -24,12 +24,12 @@ public class OrderService {
 
   @RequestMapping(value = "orders", method = RequestMethod.POST, headers = "Accept=application/json")
   public OrderCreationResp createOrder(OrderCreationReq request) {
-    return createBO(OrderBO.class, request)
+    return createBO(OrderBO.class, new OrderCreationReq())
         .save()
         .into(OrderCreationResp.class);
   }
 
-  private <B extends BizObject<B>, ConstructorArgs> B createBO(Class<B> bClass, ConstructorArgs... request) {
+  private <B extends BizObject<B>> B createBO(Class<B> bClass, Object... request) {
     return context.getBean(bClass, request);
   }
 

@@ -30,7 +30,6 @@ public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements 
     super(new Order());
   }
 
-  @Autowired
   public OrderBean(Long oid) {
     super(oid);
   }
