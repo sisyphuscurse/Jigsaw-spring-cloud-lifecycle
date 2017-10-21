@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-public class Order {
+public class Order implements Keyed<Long> {
   @Id
   @GeneratedValue
   private Long id;
@@ -39,4 +39,8 @@ public class Order {
   @Column(nullable = false)
   private String confirmTime;
 
+  @Override
+  public Long getKey() {
+    return id;
+  }
 }

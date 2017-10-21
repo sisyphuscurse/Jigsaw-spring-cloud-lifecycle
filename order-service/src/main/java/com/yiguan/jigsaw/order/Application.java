@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableAutoConfiguration
-@ComponentScan
+@ComponentScan //Duplicated with EnableAutoConfiguration
 @EnableCircuitBreaker
 @EnableFeignClients
 @EnableSwagger2

@@ -1,6 +1,3 @@
-/**
- *
- */
 package com.yiguan.jigsaw.order.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -11,9 +8,9 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class OrderConfiguration {
 
-    @Bean
-    @LoadBalanced
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+  @Bean
+  @LoadBalanced
+  RestTemplate restTemplate() {
+    return new RestTemplate();
+  }
 }

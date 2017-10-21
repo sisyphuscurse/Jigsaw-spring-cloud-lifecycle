@@ -1,16 +1,16 @@
 package com.yiguan.jigsaw.order.biz.impl;
 
+import com.yiguan.jigsaw.order.biz.entity.Keyed;
 import net.imadz.lifecycle.LifecycleContext;
 import net.imadz.lifecycle.annotations.callback.PostStateChange;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.Optional;
 
-public class BizObjectBase<B extends BizObjectBase<B, E, K>, E, K extends Serializable> {
+public class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>, K extends Serializable> {
   private static final ModelMapper mapper = new ModelMapper();
   protected CrudRepository<E, K> repository;
   protected E internalState;
@@ -31,28 +31,23 @@ public class BizObjectBase<B extends BizObjectBase<B, E, K>, E, K extends Serial
     }
   }
 
-  protected B withInternalState(E entity) {
-    internalState = entity;
-    return (B) this;
-  }
-
   public <T> T into(Class<T> targetType) {
-    return mapper.map(getInternalState(), targetType);
+    return mapper.map(internalState, targetType);
   }
-
-  private E getInternalState() {
-    return internalState;
-  }
-
 
   @PostStateChange
   public void onStateChange(LifecycleContext<B, ?> context) {
-    repository.save(context.getTarget().internalState);
+    internalSave(context.getTarget().internalState);
   }
 
   public B save() {
-    repository.save(internalState);
+    internalSave(internalState);
     return (B) this;
+  }
+
+  private void internalSave(E entity) {
+    repository.save(entity);
+    key = Optional.of(key.orElse(internalState.getKey()));
   }
 
 }

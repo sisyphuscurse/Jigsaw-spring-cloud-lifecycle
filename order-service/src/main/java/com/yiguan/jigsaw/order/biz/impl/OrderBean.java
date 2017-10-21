@@ -7,7 +7,7 @@ import com.yiguan.jigsaw.order.biz.entity.Order;
 import com.yiguan.jigsaw.order.biz.fsm.OrderFSM;
 import com.yiguan.jigsaw.order.biz.fsm.OrderStatusConverter;
 import com.yiguan.jigsaw.order.biz.repo.OrderRepository;
-import com.yiguan.jigsaw.order.service.args.OrderCreationReq;
+import com.yiguan.jigsaw.order.service.argument.OrderCreationReq;
 import com.yiguan.jigsaw.order.service.event.inbound.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.service.event.inbound.ArtifactSigned;
 import com.yiguan.jigsaw.order.service.event.outbound.OrderPaid;
@@ -27,7 +27,12 @@ public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements 
 
   @SuppressWarnings("PMD")
   public OrderBean(OrderCreationReq order) {
-    super(new Order());
+    super(populateOrder(order));
+  }
+
+  @SuppressWarnings("PMD")
+  private static Order populateOrder(OrderCreationReq req) {
+    return new Order();
   }
 
   public OrderBean(Long oid) {

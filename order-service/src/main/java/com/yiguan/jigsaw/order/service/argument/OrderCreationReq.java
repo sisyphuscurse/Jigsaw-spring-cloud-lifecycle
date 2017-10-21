@@ -1,4 +1,4 @@
-package com.yiguan.jigsaw.order.service.args;
+package com.yiguan.jigsaw.order.service.argument;
 
 import lombok.Getter;
 import lombok.Setter;

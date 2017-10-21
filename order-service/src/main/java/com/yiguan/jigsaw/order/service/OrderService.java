@@ -2,8 +2,8 @@ package com.yiguan.jigsaw.order.service;
 
 import com.yiguan.jigsaw.order.biz.BizObject;
 import com.yiguan.jigsaw.order.biz.OrderBO;
-import com.yiguan.jigsaw.order.service.args.OrderCreationReq;
-import com.yiguan.jigsaw.order.service.args.OrderCreationResp;
+import com.yiguan.jigsaw.order.service.argument.OrderCreationReq;
+import com.yiguan.jigsaw.order.service.argument.OrderCreationResp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.ApplicationContext;
