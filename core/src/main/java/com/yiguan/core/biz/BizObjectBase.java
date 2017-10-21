@@ -1,6 +1,6 @@
-package com.yiguan.jigsaw.order.biz.impl;
+package com.yiguan.core.biz;
 
-import com.yiguan.jigsaw.order.biz.entity.Keyed;
+import com.yiguan.core.persistence.Keyed;
 import net.imadz.lifecycle.LifecycleContext;
 import net.imadz.lifecycle.annotations.callback.PostStateChange;
 import org.modelmapper.ModelMapper;
@@ -43,6 +43,11 @@ public class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>,
 
   public B save() {
     internalSave(internalState);
+    return (B) this;
+  }
+
+  public B remove() {
+    repository.delete(internalState);
     return (B) this;
   }
 

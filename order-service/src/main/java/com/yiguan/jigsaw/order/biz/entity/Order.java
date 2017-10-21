@@ -1,5 +1,6 @@
 package com.yiguan.jigsaw.order.biz.entity;
 
+import com.yiguan.core.persistence.Keyed;
 import com.yiguan.jigsaw.order.biz.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;

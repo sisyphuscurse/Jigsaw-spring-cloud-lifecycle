@@ -11,6 +11,14 @@
 
   <artifactId>order-service</artifactId>
 
+  <dependencies>
+    <dependency>
+      <groupId>com.yiguan</groupId>
+      <artifactId>core</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <!-- [Lifecycle] -->
@@ -21,7 +29,9 @@
         <executions>
           <execution>
             <configuration>
-              <lifecyclePath>${user.home}/.m2/repository/net/imadz/Lifecycle/${lifecycle.version}/Lifecycle-${lifecycle.version}.jar</lifecyclePath>
+              <lifecyclePath>
+                ${user.home}/.m2/repository/net/imadz/Lifecycle/${lifecycle.version}/Lifecycle-${lifecycle.version}.jar
+              </lifecyclePath>
             </configuration>
             <goals>
               <goal>StaticWeave</goal>

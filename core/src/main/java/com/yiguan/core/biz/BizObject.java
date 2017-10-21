@@ -1,4 +1,4 @@
-package com.yiguan.jigsaw.order.biz;
+package com.yiguan.core.biz;
 
 public interface BizObject<B extends BizObject<B>> {
   B save();

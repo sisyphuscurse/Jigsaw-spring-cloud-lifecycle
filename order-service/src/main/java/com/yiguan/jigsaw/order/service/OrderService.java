@@ -1,6 +1,6 @@
 package com.yiguan.jigsaw.order.service;
 
-import com.yiguan.jigsaw.order.biz.BizObject;
+import com.yiguan.core.biz.BizObject;
 import com.yiguan.jigsaw.order.biz.OrderBO;
 import com.yiguan.jigsaw.order.service.argument.OrderCreationReq;
 import com.yiguan.jigsaw.order.service.argument.OrderCreationResp;

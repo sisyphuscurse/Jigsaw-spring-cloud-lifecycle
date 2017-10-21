@@ -1,6 +1,7 @@
 package com.yiguan.jigsaw.order.biz.impl;
 
 import com.google.common.eventbus.Subscribe;
+import com.yiguan.core.biz.BizObjectBase;
 import com.yiguan.jigsaw.order.biz.OrderBO;
 import com.yiguan.jigsaw.order.biz.OrderStatus;
 import com.yiguan.jigsaw.order.biz.entity.Order;

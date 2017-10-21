@@ -1,4 +1,4 @@
-package com.yiguan.jigsaw.order.biz.entity;
+package com.yiguan.core.persistence;
 
 import java.io.Serializable;
 
