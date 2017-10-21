@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>Jigsaw-spring-cloud-lifecycle</artifactId>
+    <groupId>com.yiguan</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>order-service</artifactId>
+
+  <build>
+    <plugins>
+      <!-- [Lifecycle] -->
+      <plugin>
+        <groupId>net.imadz</groupId>
+        <artifactId>lifecycle-static-weaving-maven-plugin</artifactId>
+        <version>${lifecycle.weaver.version}</version>
+        <executions>
+          <execution>
+            <configuration>
+              <lifecyclePath>${user.home}/.m2/repository/net/imadz/Lifecycle/${lifecycle.version}/Lifecycle-${lifecycle.version}.jar</lifecyclePath>
+            </configuration>
+            <goals>
+              <goal>StaticWeave</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- [Docker] -->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.4.13</version>
+        <configuration>
+          <imageName>faceapi</imageName>
+          <imageTags>
+            <imageTag>docker.mock</imageTag>
+          </imageTags>
+          <baseImage>10.232.128.157:5000/yiguan/alpine-oraclejdk8:latest</baseImage>
+          <!-- copy the service's jar file from target into the root directory of the image -->
+          <resources>
+            <resource>
+              <targetPath>/work</targetPath>
+              <directory>${project.build.directory}</directory>
+              <include>${project.build.finalName}.jar</include>
+            </resource>
+            <resource>
+              <targetPath>/app</targetPath>
+              <directory>${project.basedir}/../</directory>
+              <include>start.sh</include>
+            </resource>
+          </resources>
+          <workdir>/app</workdir>
+          <runs>
+            <run>chmod 777 start.sh</run>
+          </runs>
+          <cmd>sh /app/start.sh docker</cmd>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

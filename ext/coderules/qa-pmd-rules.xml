@@ -1,0 +1,1594 @@
+<?xml version="1.0" ?>
+
+<ruleset name="qa">
+  <description>Custom rules for ATG</description>
+
+  <!-- To add more rules, unjar pmd-5.0.jar and look at the XML files contained in /rulesets/java -->
+
+  <rule ref="rulesets/java/basic.xml/JumbledIncrementer" />
+  <rule ref="rulesets/java/basic.xml/ForLoopShouldBeWhileLoop" />
+  <rule ref="rulesets/java/basic.xml/ReturnFromFinallyBlock" />
+  <rule ref="rulesets/java/basic.xml/UnconditionalIfStatement" />
+  <rule ref="rulesets/java/basic.xml/BooleanInstantiation" />
+  <rule ref="rulesets/java/basic.xml/CollapsibleIfStatements" />
+  <rule ref="rulesets/java/basic.xml/ClassCastExceptionWithToArray" />
+  <rule ref="rulesets/java/basic.xml/MisplacedNullCheck" />
+  <rule ref="rulesets/java/basic.xml/AvoidThreadGroup" />
+  <rule ref="rulesets/java/basic.xml/BrokenNullCheck" />
+  <rule ref="rulesets/java/basic.xml/BigIntegerInstantiation" />
+  <rule ref="rulesets/java/basic.xml/AvoidUsingOctalValues" />
+  <rule ref="rulesets/java/basic.xml/CheckResultSet" />
+  <rule ref="rulesets/java/basic.xml/AvoidMultipleUnaryOperators" />
+  <rule ref="rulesets/java/basic.xml/CheckSkipResult" />
+  <rule ref="rulesets/java/basic.xml/AvoidBranchingStatementAsLastInLoop" />
+
+  <rule ref="rulesets/java/braces.xml/IfStmtsMustUseBraces" />
+  <rule ref="rulesets/java/braces.xml/WhileLoopsMustUseBraces" />
+  <rule ref="rulesets/java/braces.xml/IfElseStmtsMustUseBraces" />
+  <rule ref="rulesets/java/braces.xml/ForLoopsMustUseBraces" />
+
+  <rule ref="rulesets/java/codesize.xml/ExcessiveMethodLength" />
+  <rule ref="rulesets/java/codesize.xml/ExcessiveParameterList" />
+  <rule ref="rulesets/java/codesize.xml/ExcessiveClassLength" />
+
+  <!--<rule ref="rulesets/java/codesize.xml/NPathComplexity" />-->
+  <!--<rule ref="rulesets/java/codesize.xml/CyclomaticComplexity"/>-->
+
+  <rule ref="rulesets/java/codesize.xml/NcssMethodCount" />
+  <rule ref="rulesets/java/codesize.xml/NcssTypeCount" />
+  <rule ref="rulesets/java/codesize.xml/NcssConstructorCount" />
+
+  <rule ref="rulesets/java/controversial.xml/UnnecessaryConstructor" />
+  <!--<rule ref="rulesets/java/controversial.xml/AvoidFinalLocalVariable" />-->
+  <rule ref="rulesets/java/controversial.xml/DoNotCallGarbageCollectionExplicitly" />
+  <rule ref="rulesets/java/controversial.xml/OneDeclarationPerLine" />
+
+  <rule ref="rulesets/java/design.xml/AvoidDeeplyNestedIfStmts" />
+  <rule ref="rulesets/java/design.xml/AvoidReassigningParameters" />
+  <rule ref="rulesets/java/design.xml/BadComparison" />
+  <rule ref="rulesets/java/design.xml/EqualsNull" />
+  <rule ref="rulesets/java/design.xml/InstantiationToGetClass" />
+  <rule ref="rulesets/java/design.xml/IdempotentOperations" />
+  <rule ref="rulesets/java/design.xml/SimpleDateFormatNeedsLocale" />
+  <rule ref="rulesets/java/design.xml/AvoidProtectedFieldInFinalClass" />
+  <rule ref="rulesets/java/design.xml/MissingStaticMethodInNonInstantiatableClass" />
+  <rule ref="rulesets/java/design.xml/AvoidInstanceofChecksInCatchClause" />
+  <rule ref="rulesets/java/design.xml/AbstractClassWithoutAbstractMethod" />
+  <rule ref="rulesets/java/design.xml/SimplifyConditional" />
+  <rule ref="rulesets/java/design.xml/PositionLiteralsFirstInComparisons" />
+  <rule ref="rulesets/java/design.xml/UncommentedEmptyMethodBody" />
+  <!--<rule ref="rulesets/java/design.xml/UncommentedEmptyConstructor" />-->
+  <rule ref="rulesets/java/design.xml/PreserveStackTrace" />
+  <rule ref="rulesets/java/design.xml/EmptyMethodInAbstractClassShouldBeAbstract" />
+  <!--<rule ref="rulesets/java/design.xml/SingularField" />-->
+  <rule ref="rulesets/java/design.xml/AbstractClassWithoutAnyMethod" />
+  <rule ref="rulesets/java/design.xml/LogicInversion" />
+
+  <rule ref="rulesets/java/empty.xml/EmptyCatchBlock" />
+  <rule ref="rulesets/java/empty.xml/EmptyIfStmt" />
+  <rule ref="rulesets/java/empty.xml/EmptyWhileStmt" />
+  <rule ref="rulesets/java/empty.xml/EmptyTryBlock" />
+  <rule ref="rulesets/java/empty.xml/EmptyFinallyBlock" />
+  <rule ref="rulesets/java/empty.xml/EmptySwitchStatements" />
+  <rule ref="rulesets/java/empty.xml/EmptySynchronizedBlock" />
+  <rule ref="rulesets/java/empty.xml/EmptyStatementNotInLoop" />
+  <rule ref="rulesets/java/empty.xml/EmptyInitializer" />
+  <rule ref="rulesets/java/empty.xml/EmptyStatementBlock" />
+  <rule ref="rulesets/java/empty.xml/EmptyStaticInitializer" />
+
+  <rule ref="rulesets/java/imports.xml/DuplicateImports" />
+  <rule ref="rulesets/java/imports.xml/UnusedImports" />
+
+  <rule ref="rulesets/java/logging-java.xml/SystemPrintln" />
+  <rule ref="rulesets/java/logging-java.xml/AvoidPrintStackTrace" />
+
+  <rule ref="rulesets/java/migrating.xml/ReplaceVectorWithList" />
+  <rule ref="rulesets/java/migrating.xml/ReplaceHashtableWithMap" />
+  <rule ref="rulesets/java/migrating.xml/ReplaceEnumerationWithIterator" />
+  <rule ref="rulesets/java/migrating.xml/AvoidEnumAsIdentifier" />
+  <rule ref="rulesets/java/migrating.xml/AvoidAssertAsIdentifier" />
+  <rule ref="rulesets/java/migrating.xml/IntegerInstantiation" />
+  <rule ref="rulesets/java/migrating.xml/ByteInstantiation" />
+  <rule ref="rulesets/java/migrating.xml/ShortInstantiation" />
+  <rule ref="rulesets/java/migrating.xml/LongInstantiation" />
+
+  <rule ref="rulesets/java/naming.xml/ShortMethodName" />
+  <!--<rule ref="rulesets/java/naming.xml/VariableNamingConventions" />-->
+  <!--<rule ref="rulesets/java/naming.xml/MethodNamingConventions" />-->
+  <rule ref="rulesets/java/naming.xml/ClassNamingConventions" />
+  <rule ref="rulesets/java/naming.xml/AbstractNaming" />
+  <rule ref="rulesets/java/naming.xml/AvoidDollarSigns" />
+  <rule ref="rulesets/java/naming.xml/MethodWithSameNameAsEnclosingClass" />
+  <rule ref="rulesets/java/naming.xml/SuspiciousHashcodeMethodName" />
+  <rule ref="rulesets/java/naming.xml/SuspiciousConstantFieldName" />
+  <rule ref="rulesets/java/naming.xml/SuspiciousEqualsMethodName" />
+  <rule ref="rulesets/java/naming.xml/AvoidFieldNameMatchingTypeName" />
+  <rule ref="rulesets/java/naming.xml/AvoidFieldNameMatchingMethodName" />
+  <rule ref="rulesets/java/naming.xml/NoPackage" />
+  <rule ref="rulesets/java/naming.xml/PackageCase" />
+  <rule ref="rulesets/java/naming.xml/MisleadingVariableName" />
+  <rule ref="rulesets/java/naming.xml/BooleanGetMethodName" />
+  <!--<rule ref="rulesets/java/naming.xml/ShortClassName" />-->
+  <rule ref="rulesets/java/naming.xml/GenericsNaming" />
+
+  <rule ref="rulesets/java/optimizations.xml/UseArrayListInsteadOfVector" />
+  <rule ref="rulesets/java/optimizations.xml/AddEmptyString" />
+
+  <rule ref="rulesets/java/strictexception.xml/AvoidCatchingThrowable" />
+  <!--<rule ref="rulesets/java/strictexception.xml/SignatureDeclareThrowsException" />-->
+  <rule ref="rulesets/java/strictexception.xml/AvoidCatchingNPE" />
+  <!--<rule ref="rulesets/java/strictexception.xml/AvoidThrowingRawExceptionTypes" />-->
+  <!--<rule ref="rulesets/java/strictexception.xml/AvoidThrowingNullPointerException" />-->
+  <rule ref="rulesets/java/strictexception.xml/DoNotExtendJavaLangError" />
+  <rule ref="rulesets/java/strictexception.xml/AvoidThrowingNewInstanceOfSameException" />
+  <!--<rule ref="rulesets/java/strictexception.xml/AvoidCatchingGenericException" />-->
+  <rule ref="rulesets/java/strictexception.xml/AvoidLosingExceptionInformation" />
+
+  <rule ref="rulesets/java/strings.xml/StringToString" />
+  <rule ref="rulesets/java/strings.xml/ConsecutiveLiteralAppends" />
+  <rule ref="rulesets/java/strings.xml/UseEqualsToCompareStrings" />
+
+  <rule ref="rulesets/java/typeresolution.xml/LooseCoupling" />
+  <!--<rule ref="rulesets/java/typeresolution.xml/SignatureDeclareThrowsException" />-->
+
+  <rule ref="rulesets/java/unnecessary.xml/UnnecessaryConversionTemporary" />
+  <rule ref="rulesets/java/unnecessary.xml/UselessOverridingMethod" />
+  <rule ref="rulesets/java/unnecessary.xml/UselessOperationOnImmutable" />
+  <rule ref="rulesets/java/unnecessary.xml/UnusedNullCheckInEquals" />
+
+  <rule ref="rulesets/java/unusedcode.xml/UnusedPrivateField" />
+  <rule ref="rulesets/java/unusedcode.xml/UnusedLocalVariable" />
+  <rule ref="rulesets/java/unusedcode.xml/UnusedPrivateMethod" />
+  <rule ref="rulesets/java/unusedcode.xml/UnusedFormalParameter" />
+
+  <!--
+		PMD priority 1 -> severity error, priority high
+		PMD priority 2 -> severity error, priority normal
+		PMD priority 3 -> severity warning, priority high
+		PMD priority 4 -> severity warning, priority normal
+		PMD priority 5 -> severity information, priority normal
+  -->
+
+  <rule name="RedirectInHandleMethods" message="Never call sendLocalRedirect() or sendRedirect() in form handler handle*() methods" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+	<example>
+		// bad
+		public boolean handle*(DynamoHttpServletRequest pRequest, DynamoHttpServletResponse pResponse) throws ServletException, IOException
+		{
+			...
+		  	pResponse.sendLocalRedirect(url, pRequest);	
+			pResponse.sendRedirect(url);
+		}
+
+		// good
+		public boolean handle*(DynamoHttpServletRequest pRequest, DynamoHttpServletResponse pResponse) throws ServletException, IOException
+		{
+			...
+			return checkFormRedirect(getSuccessURL(), getErrorURL(), pRequest, pResponse);
+		}
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceBodyDeclaration[MethodDeclaration/MethodDeclarator[starts-with(@Image,'handle')]]
+				//PrimaryExpression[PrimaryPrefix/Name[
+					ends-with(@Image, 'sendLocalRedirect') or 
+					ends-with(@Image, 'sendRedirect')]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="StringLiteralCheckFormRedirect" message="Never pass hard-coded strings to checkFormRedirect()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+    <example>
+    	// bad
+    	return checkFormRedirect("/successURL.jsp", "/errorURL.jsp", pRequest, pResponse);
+    	
+    	// good
+    	return checkFormRedirect(getSuccessURL(), getErrorURL(), pRequest, pResponse);
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'checkFormRedirect')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]
+				 ]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="GetParameterInHandleMethods" message="Never call getParameter() in form handler handle*() methods" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+	<example>
+		// bad
+		public boolean handle*(DynamoHttpServletRequest pRequest, DynamoHttpServletResponse pResponse) throws ServletException, IOException
+		{
+			...
+		  	String firstName = pRequest.getParameter("firstName");
+		}
+
+		// good
+		public boolean handle*(DynamoHttpServletRequest pRequest, DynamoHttpServletResponse pResponse) throws ServletException, IOException
+		{
+			...
+			// where getFirstName() is set using on the JSP page as a bean and retrieved using traditional ATG-style getter/setters
+		  	String firstName = getFirstName();
+		}
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceBodyDeclaration[MethodDeclaration/MethodDeclarator[starts-with(@Image,'handle')]]
+				//PrimaryExpression[PrimaryPrefix/Name[ends-with(@Image, 'getParameter')]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="PipelineExceptionResourceBundle" message="Never pass a hard-coded string to PipelineResult.addError()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+	<example>
+		// bad
+		pipelineResult.addError("message", "message");
+		
+		// good
+		pipelineResult.addError(resourceBundle.getString("key"), resourceBundle.getString("key"));
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'PipelineResult.addError')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="InternationalizedDropletException" message="Never pass a hard-coded string to the constructor of DropletExceptions" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+	<example>
+		// bad
+		addFormException((new DropletException("message"));
+
+		// good
+		addFormException((new DropletException(resourceBundle.getString("key")));
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//AllocationExpression[ClassOrInterfaceType[@Image="DropletException"]] 
+				//PrimaryExpression/PrimaryPrefix/Literal[contains(@Image, '"')]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="GetMessageDropletException" message="Never call *.getMessage() in the constructor of DropletExceptions" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+	<example>
+		// bad
+		addFormException(new DropletException("message" + e.getMessage()));
+		addFormException(new DropletException(resourceBundle.getString("key") + e.getMessage()));
+		
+		// good
+		addFormException(new DropletException(resourceBundle.getString("key")));
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//AllocationExpression[ClassOrInterfaceType[@Image="DropletException"]] 
+				//PrimaryExpression/PrimaryPrefix/Name[ends-with(@Image, 'getMessage')]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="GetMessageLogError" message="Never use *.getMessage() in logError()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+		// bad
+		logError(e.getMessage());
+		logError("message" + e.getMessage());
+		
+		// good
+		logError("message", e);
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'logError')]]
+				//PrimaryExpression/PrimaryPrefix/Name[ends-with(@Image, 'getMessage')]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="GetMessagePipelineException" message="Never pass *.getMessage() to PipelineResult.addError()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+	<example>
+		// bad
+		pipelineResult.addError("message" + e.getMessage(), "message" + e.getMessage());
+		pipelineResult.addError(resourceBundle.getString("key") + e.getMessage(), resourceBundle.getString("key") + e.getMessage());
+		
+		// good
+		pipelineResult.addError(resourceBundle.getString("key"), resourceBundle.getString("key"));
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'PipelineResult.addError')]]
+				//PrimaryExpression/PrimaryPrefix/Name[ends-with(@Image, 'getMessage')]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="LogErrorTwoArguments" message="Try to pass two arguments to logError(). A String + Exception is perferred" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+	<example>
+		// bad
+		logError("message");
+		
+		// good
+		logError("message", e);
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'logError')]]
+				[PrimarySuffix/Arguments/ArgumentList[count(*) = 1]]        
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="HardCodedFileExtensions" message="Avoid hard-coded file extensions" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+    	// bad
+		List allowableImageExtensions = new ArrayList();
+		allowableImageExtensions.add(".jpg");
+		allowableImageExtensions.add(".gif");
+		allowableImageExtensions.add(".png");
+		
+		// good
+		List allowableImageExtensions = getAllowablefileExtensions();
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression/PrimaryPrefix/Literal[
+					@Image='".jsp"' or 
+					@Image='".htm"' or 
+					@Image='".jhtml"' or 
+					@Image='".html"' or 
+					@Image='".gif"' or 
+					@Image='".jpg"' or 
+					@Image='".png"' or 
+					@Image='".js"' or 
+					@Image='".css"']
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+  
+  <!--<rule name="HardCodedURLs" message="Avoid hard-coded URLs" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">-->
+    <!--<priority>3</priority>-->
+	<!--<example>-->
+		<!--// bad-->
+		<!--final String successURL = "/context-path/home.jsp";-->
+		<!---->
+		<!--// good-->
+		<!--final String successURL = getSuccessURL();-->
+	<!--</example>-->
+    <!--<properties>-->
+      <!--<property name="xpath">-->
+        <!--<value>-->
+        	<!--<![CDATA[-->
+				<!--//PrimaryExpression[PrimaryPrefix/Literal[-->
+				<!--(-->
+					 <!--(-->
+						  <!--contains(@Image,'.jsp') or -->
+						  <!--contains(@Image,'.htm') or -->
+						  <!--contains(@Image,'.jhtml') or -->
+						  <!--ends-with(@Image,'.gif"') or -->
+						  <!--ends-with(@Image,'.jpg"') or -->
+						  <!--ends-with(@Image,'.js"') or -->
+						  <!--ends-with(@Image,'.css"')-->
+					 <!--)-->
+				<!--) or -->
+				<!--starts-with(@Image,'"http:') or -->
+				<!--starts-with(@Image,'"https:')]]-->
+			<!--]]>-->
+		<!--</value>-->
+      <!--</property>-->
+    <!--</properties>-->
+  <!--</rule>-->
+
+  <!--<rule name="SystemCurrentTimeMillis" message="Avoid calling System.currentTimeMillis()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">-->
+    <!--<priority>4</priority>-->
+    <!--<example>-->
+    	<!--// bad-->
+    	<!--long now = System.currentTimeMillis();-->
+    	<!---->
+    	<!--// good-->
+    	<!--// where getCurrentDate() is a reference to /atg/dynamo/service/CurrentDate-->
+    	<!--long now = getCurrentDate().getTime();-->
+    <!--</example>-->
+    <!--<properties>-->
+      <!--<property name="xpath">-->
+        <!--<value>-->
+        	<!--<![CDATA[-->
+				<!--//PrimaryExpression-->
+				 <!--[PrimaryPrefix/Name-->
+				  <!--[contains(@Image, 'System.currentTimeMillis')]]-->
+			<!--]]>-->
+		<!--</value>-->
+      <!--</property>-->
+    <!--</properties>-->
+  <!--</rule>-->
+
+  <rule name="StringLiteralServiceLocalParameter" message="Avoid passing a hard-coded string to serviceLocalParameter()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+		// bad
+		public void service(DynamoHttpServletRequest request, DynamoHttpServletResponse response) throws ServletException, IOException
+		{
+			...
+			request.serviceLocalParameter("key", request, response);
+		}
+		
+		// good
+		public void service(DynamoHttpServletRequest request, DynamoHttpServletResponse response) throws ServletException, IOException
+		{
+			...
+			request.serviceLocalParameter(CONSTANT, request, response);
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceBodyDeclaration[MethodDeclaration/MethodDeclarator[@Image='service']]
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'serviceLocalParameter')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]
+				 ]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="StringLiteralGetLocalParameter" message="Avoid passing a hard-coded string to getLocalParameter()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+		// bad
+		public void service(DynamoHttpServletRequest request, DynamoHttpServletResponse response) throws ServletException, IOException
+		{
+			...
+			String str = (String)pRequest.getLocalParameter("key");
+		}
+		
+		// good
+		public void service(DynamoHttpServletRequest request, DynamoHttpServletResponse response) throws ServletException, IOException
+		{
+			...
+			String str = (String)pRequest.getLocalParameter(CONSTANT);
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceBodyDeclaration[MethodDeclaration/MethodDeclarator[@Image='service']]
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'getLocalParameter')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]
+				 ]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="StringLiteralGetObjectParameter" message="Avoid passing a hard-coded string to getObjectParameter()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+		// bad
+		public void service(DynamoHttpServletRequest request, DynamoHttpServletResponse response) throws ServletException, IOException
+		{
+			...
+			String str = (String)pRequest.getObjectParameter("key");
+		}
+		
+		// good
+		public void service(DynamoHttpServletRequest request, DynamoHttpServletResponse response) throws ServletException, IOException
+		{
+			...
+			String str = (String)pRequest.getObjectParameter(CONSTANT);
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceBodyDeclaration[MethodDeclaration/MethodDeclarator[@Image='service']]
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'getObjectParameter')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]
+				 ]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="GetParameter" message="Avoid DynamoHttpServletRequest.getParameter(). Use DynamoHttpServletRequest.getLocalParameter() instead" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+		// bad
+		public class *Droplet extends DynamoServlet
+		{
+			public void service(DynamoHttpServletRequest request, DynamoHttpServletResponse response) throws ServletException, IOException
+			{
+				...
+				String str = (String)pRequest.getParameter(KEY);
+			}
+		}
+
+		// good
+		public class *Droplet extends DynamoServlet
+		{
+			public void service(DynamoHttpServletRequest request, DynamoHttpServletResponse response) throws ServletException, IOException
+			{
+				...
+				String str = (String)pRequest.getLocalParameter(KEY);
+			}
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceDeclaration
+				[ExtendsList/ClassOrInterfaceType[@Image = 'DynamoServlet' or ends-with(@Image, 'Droplet')]]
+				[ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/MethodDeclaration/MethodDeclarator[contains(@Image, 'service')]]
+				//PrimaryPrefix/Name[ends-with(@Image, '.getParameter')]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="StringLiteralGetParameter" message="Avoid passing a hard-coded string to getParameter()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+		// bad
+		public void service(DynamoHttpServletRequest pRequest, DynamoHttpServletResponse pResponse) throws ServletException, IOException
+		{
+			...
+			String str = (String)pRequest.getParameter("key");
+		}
+		
+		// good
+		public void service(DynamoHttpServletRequest pRequest, DynamoHttpServletResponse pResponse) throws ServletException, IOException
+		{
+			...
+			String str = (String)pRequest.getParameter(CONSTANT);
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceBodyDeclaration[MethodDeclaration/MethodDeclarator[@Image='service']]
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'getParameter')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]
+				 ]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="HardCodedPerformanceMonitorOperations" message="Avoid passing a hard-coded string to PerformanceMonitor.startOperation()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+    	// bad
+    	PerformanceMonitor.startOperation("key");
+    	PerformanceMonitor.endOperation("key");
+
+    	// good
+    	final String KEY = "key";
+    	...
+    	PerformanceMonitor.startOperation(KEY);
+    	PerformanceMonitor.endOperation(KEY);
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'PerformanceMonitor.startOperation') or contains(@Image, 'PerformanceMonitor.endOperation')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]
+				 ]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="HardCodedRQLs" message="Never hard-code RQL queries" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+    <example>
+    	// bad
+    	RqlStatement statement = RqlStatement.parseRqlStatement("active = true");
+
+    	// good
+    	RqlStatement statement = RqlStatement.parseRqlStatement(getActiveRqlQuery());    	
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'RqlStatement.parseRqlStatement')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"') and (not(contains(@Image, 'ALL') or contains(@Image, 'all')))]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="WrappedPerformanceMonitorOperations" message="Always wrap PerformanceMonitor.startOperation() and PerformanceMonitor.endOperation() with a if (PerformanceMonitor.isEnabled())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+    	// bad
+    	PerformanceMonitor.startOperation(KEY);
+    	PerformanceMonitor.endOperation(KEY);
+    	
+    	// good
+    	if (PerformanceMonitor.isEnabled())
+    	{
+	    	PerformanceMonitor.startOperation(KEY);
+	    }
+    	if (PerformanceMonitor.isEnabled())
+    	{
+	    	PerformanceMonitor.endOperation(KEY);
+	    }
+    </example>    
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//Name[(@Image='PerformanceMonitor.startOperation' or @Image='PerformanceMonitor.endOperation') and 
+				count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[@Image='PerformanceMonitor.isEnabled']) = 0] 
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="ServiceLocalParameterInLogging" message="Never call serviceLocalParameter() inside of an if(isLogging*())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+    	// bad
+		if (isLoggingDebug())
+		{
+			...
+			request.serviceLocalParameter(EMPTY, request, response);
+		}
+   	
+    	// good
+		if (isLoggingDebug())
+		{
+			...
+		}
+		request.serviceLocalParameter(EMPTY, request, response);
+    </example>    
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//Name[ends-with(@Image, '.serviceLocalParameter') and 
+				count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/
+				Name[@Image='isLoggingDebug' or 
+				@Image='isLoggingInfo' or 
+				@Image='isLoggingWarning' or 
+				@Image='isLoggingError' or 
+				@Image='isLoggingTrace']
+				) > 0] 
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="HardCodeRequestNucleusLookup" message="Avoid passing a hard-coded string to a resolveName() method call" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+    	// bad
+		Component c = (Component)pRequest.resolveName("/com/path/to/Component");
+
+		// better (but still not great)
+		Component c = (Component)pRequest.resolveName(COMPONENT_PATH);
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				[PrimaryPrefix/Name[ends-with(@Image, '.resolveName')]]
+				[PrimarySuffix/Arguments/ArgumentList/Expression/PrimaryExpression/PrimaryPrefix/Literal[contains(@Image, '"')]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="NucleusLookup" message="Avoid resolving Nucleus services statically (such as ServletUtil.getCurrentRequest().resolveName() or Nucleus.getGlobalNucleus().resolveName())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>5</priority>
+    <example>
+		// bad
+		Component c = (Component)ServletUtil.getCurrentRequest().resolveName(COMPONENT_PATH);
+		c.doSomething();
+		
+		// good
+		getComponent().doSomething(); // where getComponent() has a corresponding setter method and the path to the component is set through a properties file
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				[PrimaryPrefix/Name[ends-with(@Image, '.resolveName')]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="HardCodingNucleusPaths" message="Avoid hard-coding Nucleus component paths" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+    	// bad
+		public static String COMPONENT_PATH_PROFILE = "/atg/userprofiling/Profile";
+		
+		// good
+		getProfile();
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//VariableDeclarator/VariableInitializer/Expression/PrimaryExpression/
+				PrimaryPrefix/Literal[
+					(
+						starts-with(@Image, '"/atg/') or 
+						starts-with(@Image, '"/com/') or 
+						starts-with(@Image, '"/uk/co/')
+					)
+					and not(ends-with(@Image, '/"'))
+				]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="GettersSettersForDropletsFormHandlers" message="Never reference droplets or form handlers from other droplets or form handlers" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+    <example>
+    	// bad
+		private *Droplet *Droplet;
+	
+		public *Droplet get*Droplet()
+		{
+			return *Droplet;
+		}
+	
+		public void set*Droplet(*Droplet *Droplet)
+		{
+			this.*Droplet = *Droplet;
+		}
+
+		... 
+		
+		getAllScreenDisplayDroplet().doSomething();
+
+		// good
+		get*Manager().doSomething();
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceDeclaration/ClassOrInterfaceBody/ClassOrInterfaceBodyDeclaration/MethodDeclaration/MethodDeclarator
+				[
+					(starts-with(@Image,'get') or 
+					starts-with(@Image,'set')) and 
+					(ends-with(@Image,'Droplet') or ends-with(@Image,'FormHandler'))
+				]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="StringLiteralSetParameter" message="Avoid passing a hard-coded string to setParameter() in form handlers or droplets. Use a constant instead" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+		// bad
+		prequest.setParameter("key", "value");
+
+		// good
+		prequest.setParameter(KEY, value);
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				[PrimaryPrefix/Name[contains(@Image,'setParameter')]]
+				[PrimarySuffix/Arguments/ArgumentList
+				  /Expression/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]]
+				[//ClassOrInterfaceDeclaration[ExtendsList/ClassOrInterfaceType[
+					@Image='DynamoServlet' or 
+					ends-with(@Image,'Droplet') or 
+					ends-with(@Image,'FormHandler')
+				]]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+  
+  <rule name="CallTransactionManagerDirectly" message="Avoid interacting with the transaction manager directly" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+    	// bad
+    	getTransactionManager().rollback();
+    	
+    	// good - example of proper ATG-style transaction demarcation
+		TransactionDemarcation td=new TransactionDemarcation();
+		boolean rollback=false;
+		td.begin(getTransactionManager(), TransactionDemarcation.REQUIRES_NEW);
+		...
+		rollback=true;
+		...
+		td.end(rollback);
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				[PrimaryPrefix/Name[ends-with(@Image, 'TransactionManager')]]
+				[PrimarySuffix[
+					@Image='setRollbackOnly' or 
+					@Image='rollback' or 
+					@Image='begin' or 
+					@Image='resume' or 
+					@Image='suspend' or 
+					@Image='commit'
+				]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="StringLiteralRunProcess" message="Never pass a string to PipelineManager().runProcess()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+    <example>
+    	// bad
+		PipelineResult pResult = getPipelineManager().runProcess("chainId", params);
+		
+		// good
+		PipelineResult pResult = getPipelineManager().runProcess(get*ChainId(), params);
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//Block/BlockStatement/LocalVariableDeclaration
+				[Type/ReferenceType/ClassOrInterfaceType[@Image='PipelineResult']]
+				[VariableDeclarator/VariableInitializer/Expression/PrimaryExpression/PrimarySuffix[@Image='runProcess']]
+				[VariableDeclarator/VariableInitializer/Expression/PrimaryExpression/PrimarySuffix
+				/Arguments/ArgumentList/Expression/PrimaryExpression/PrimaryPrefix/Literal[contains(@Image, '"')]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="GenerateFormExceptionMethod" message="Avoid defining and using the method generateFormException()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+		// bad
+		public void generateFormException(String whatException, DynamoHttpServletRequest pRequest)
+		{
+			...
+		}
+		
+		// good
+		addFormException(new DropletException(resourceBundle.getString("key")));
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//MethodDeclarator[@Image='generateFormException']
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+  
+  <rule name="HardCodedJNDINames" message="Never hard-code JNDI names" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+	<example>
+		// bad
+		DataSource ds = (DataSource) ic.lookup("java:*_ds");
+		
+		// good
+		DataSource ds = (DataSource)get*DataSource();
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryPrefix
+				  /Literal[
+				  	starts-with(@Image, '"java:') or 
+				  	starts-with(@Image, '"dynamo:/') or 
+				  	starts-with(@Image, '"jndi:')
+				  ]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+  
+  <rule name="SecondSetPropertyValueString" message="Avoid having the second argument of setPropertyValue() be a string" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+	<example>
+		// bad
+		setPropertyValue(PROPERTY_NAME, "value");
+		
+		// good
+		setPropertyValue(PROPERTY_NAME, value);
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				 [PrimaryPrefix/Name
+				  [contains(@Image, 'setPropertyValue')]]
+				 [PrimarySuffix/Arguments/ArgumentList
+				  /Expression[2]/PrimaryExpression/PrimaryPrefix
+				  /Literal
+				   [contains(@Image, '"')]
+				 ]
+				 [count(PrimarySuffix/Arguments/ArgumentList/Expression) = 2]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="ReturnsLogging" message="Never 'return' from within if(isLogging*()) statements" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+    <example>
+    	// bad
+    	if (isLogging*())
+    	{
+    		...
+    		return;
+    	}
+    	
+    	// good
+    	if (isLogging*())
+    	{
+    		...
+    	}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ReturnStatement[
+				count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[
+					@Image='isLoggingError' or 
+					@Image='isLoggingInfo' or 
+					@Image='isLoggingWarning' or 
+					@Image='isLoggingTrace' or 
+					@Image='isLoggingDebug']
+				) > 0]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="ContinuesLogging" message="Never 'continue' from within if(isLogging*()) statements" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+    <example>
+    	// bad
+    	if (isLogging*())
+    	{
+    		...
+    		continue;
+    	}
+    	
+    	// good
+    	if (isLogging*())
+    	{
+    		...
+    	}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ContinueStatement[
+				count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[
+					@Image='isLoggingError' or 
+					@Image='isLoggingInfo' or 
+					@Image='isLoggingWarning' or 
+					@Image='isLoggingTrace' or 
+					@Image='isLoggingDebug']
+				) > 0]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="BreaksLogging" message="Never 'break' from within if(isLogging*()) statements" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+    <example>
+    	// bad
+    	if (isLogging*())
+    	{
+    		...
+    		break;
+    	}
+    	
+    	// good
+    	if (isLogging*())
+    	{
+    		...
+    	}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//BreakStatement[
+				count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[
+					@Image='isLoggingError' or 
+					@Image='isLoggingInfo' or 
+					@Image='isLoggingWarning' or 
+					@Image='isLoggingTrace' or 
+					@Image='isLoggingDebug']
+				) > 0]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="PrintStackTraceInLogging" message="Never call printStackTrace() from within if(isLogging[Debug/Info/Trace]())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>1</priority>
+    <example>
+    	// bad
+    	if (isLoggingDebug())
+    	{
+    		e.printStackTrace();
+    	}
+    	
+    	// good
+    	if (isLoggingError())
+    	{
+    		logError("message", e);
+    	}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//Name[ends-with(@Image, 'printStackTrace') and 
+				count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[
+				@Image='isLoggingDebug' or 
+				@Image='isLoggingInfo' or 
+				@Image='isLoggingTrace'
+				]) > 0]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="HardCodedSQL" message="Never hard-code SQL statements" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+    <example>
+    	// bad
+    	String sql = "select * from table ...";
+
+    	// good
+    	String sql = getSqlQuery();
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryPrefix
+				  /Literal[starts-with(@Image, '"select ') and contains(@Image, 'from')]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="SystemOutPrintln" message="Avoid calling System.out.print*" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+    	// bad
+    	System.out.println("message");
+    	
+    	// good
+    	if (isLogging*())
+    	{
+    		log*("message");
+    	}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryPrefix/Name[starts-with(@Image, 'System.out.print')]
+				[//ClassOrInterfaceDeclaration[
+					ExtendsList/ClassOrInterfaceType
+					[not (@Image = 'PublishingAction')]]]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <!--<rule name="HardCodedUrlParameters" message="Never hard-code URL parameters" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">-->
+    <!--<priority>2</priority>-->
+    <!--<example>-->
+    	<!--// bad-->
+    	<!--String url = "/page.jsp?param=value";-->
+    	<!---->
+    	<!--// good-->
+    	<!--String url = getUrl();-->
+    <!--</example>-->
+    <!--<properties>-->
+      <!--<property name="xpath">-->
+        <!--<value>-->
+        	<!--<![CDATA[-->
+				<!--//PrimaryPrefix-->
+				  <!--/Literal[-->
+				  	<!--(starts-with(@Image, '"?') or starts-with(@Image, '"&')) and -->
+				  	<!--ends-with(@Image, '="')]-->
+			<!--]]>-->
+		<!--</value>-->
+      <!--</property>-->
+    <!--</properties>-->
+  <!--</rule>-->
+
+  <!-- XPath courtesy of Will Sargent -->
+  <rule name="WrapLogDebug" message="Always wrap logDebug() with if(isLoggingDebug())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+	<example>
+		// bad
+		logDebug("message");
+		
+		// good
+		if (isLoggingDebug())
+		{
+			logDebug("message");
+		}
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+        		//Name[@Image='logDebug' and 
+				count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[@Image='isLoggingDebug']) = 0] 
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+  
+  <!-- XPath courtesy of Will Sargent -->
+  <rule name="WrapLogWarning" message="Always wrap logWarning() with if(isLoggingWarning())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+	<example>
+		// bad
+		logWarning("message");
+		
+		// good
+		if (isLoggingWarning())
+		{
+			logWarning("message");
+		}
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+        		//Name[@Image='logWarning' and 
+	        	count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[@Image='isLoggingWarning']) = 0] 
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>  
+
+  <!-- XPath courtesy of Will Sargent -->
+  <rule name="WrapLogError" message="Always wrap logError() with if(isLoggingError())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+	<example>
+		// bad
+		logError("message", e);
+		
+		// good
+		if (isLoggingError())
+		{
+			logError("message", e);
+		}
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+        		//Name[@Image='logError' and 
+        		count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[@Image='isLoggingError']) = 0] 
+        	]]>
+        </value>
+      </property>
+    </properties>
+  </rule>  
+  
+  <!-- XPath courtesy of Will Sargent -->
+  <rule name="WrapLogInfo" message="Always wrap logInfo() with if(isLoggingInfo())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+	<example>
+		// bad
+		logInfo("message");
+		
+		// good
+		if (isLoggingInfo())
+		{
+			logInfo("message");
+		}
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+        		//Name[@Image='logInfo' and 
+        		count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[@Image='isLoggingInfo']) = 0] 
+        	]]>
+        </value>
+      </property>
+    </properties>
+  </rule>  
+
+  <!-- XPath courtesy of Will Sargent -->
+  <rule name="WrapLogTrace" message="Always wrap logTrace() with if(isLoggingTrace())" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>2</priority>
+	<example>
+		// bad
+		logTrace("message");
+		
+		// good
+		if (isLoggingTrace())
+		{
+			logTrace("message");
+		}
+	</example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+        		//Name[@Image='logTrace' and 
+				count(ancestor::IfStatement/Expression/PrimaryExpression/PrimaryPrefix/Name[@Image='isLoggingTrace']) = 0] 
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="Finalizers" message="Avoid the user of finalizers" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+		// bad
+		public void finalize()
+		{
+			// do something
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//MethodDeclaration[MethodDeclarator[@Image='finalize']]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="ActionClassName" message="Try to name classes that extend PublishingAction *Action" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+		// bad
+		public class * extends PublishingAction
+		{
+			...
+		}
+
+		// good
+		public class *Action extends PublishingAction
+		{
+			...
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceDeclaration
+				[ExtendsList/ClassOrInterfaceType[@Image = 'PublishingAction']]
+				[not(ends-with(@Image, 'Action'))]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="FormHandlerClassName" message="Try to name classes that extend *FormHandler *FormHandler" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+		// bad
+		public class * extends PublishingAction
+		{
+			...
+		}
+
+		// good
+		public class *FormHandler extends *FormHandler
+		{
+			...
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceDeclaration
+				[ExtendsList/ClassOrInterfaceType[ends-with(@Image, 'FormHandler')]]
+				[not(ends-with(@Image, 'FormHandler'))]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="ServletClassName" message="Try to name classes that extend InsertableServletImpl *Servlet" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+		// bad
+		public class * extends InsertableServletImpl
+		{
+			...
+		}
+
+		// good
+		public class *Servlet extends InsertableServletImpl
+		{
+			...
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceDeclaration
+				[ExtendsList/ClassOrInterfaceType[@Image = 'InsertableServletImpl']]
+				[not(ends-with(@Image, 'Servlet'))]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="DropletClassName" message="Try to name classes that extend DynamoServlet (Droplets) *Droplet" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+		// bad
+		public class * extends DynamoServlet
+		{
+			...
+		}
+
+		// good
+		public class *Droplet extends DynamoServlet
+		{
+			...
+		}
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//ClassOrInterfaceDeclaration
+				[ExtendsList/ClassOrInterfaceType[@Image = 'DynamoServlet']]
+				[not(ends-with(@Image, 'Droplet'))]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+  
+  <rule name="GetSessionAttribute" message="Do not use request.getSession().getAttribute()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>3</priority>
+    <example>
+		// bad
+		String attributeX = request.getSession().getAttribute("attributeX");
+
+		// good
+		String attributeX = getY().getAttributeX(); // where getY() resolves to a session-scoped Nucleus component
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryExpression
+				[PrimaryPrefix/Name[ends-with(@Image, 'getSession')]]
+				[PrimarySuffix[@Image = 'getAttribute']]
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <!--<rule name="GetRequestAttribute" message="Do not use request.getAttribute()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">-->
+    <!--<priority>3</priority>-->
+    <!--<example>-->
+		<!--// bad-->
+		<!--String attributeX = request.getAttribute("attributeX");-->
+
+		<!--// good-->
+		<!--String attributeX = getY().getAttributeX(); // where getY() resolves to a request-scoped Nucleus component-->
+    <!--</example>-->
+    <!--<properties>-->
+      <!--<property name="xpath">-->
+        <!--<value>-->
+        	<!--<![CDATA[-->
+				<!--//PrimaryExpression/PrimaryPrefix/Name[ends-with(@Image, '.getAttribute')]-->
+			<!--]]>-->
+		<!--</value>-->
+      <!--</property>-->
+    <!--</properties>-->
+  <!--</rule>-->
+
+  <rule name="RQL" message="Avoid use of RQL. Try to use the QueryBuilder API instead" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>5</priority>
+    <example>
+		// bad
+		RqlStatement statement = RqlStatement.parseRqlStatement("property=?0", true);
+		RepositoryItem[] items = statement.executeQuery(getRepository().getView("view"), new String["value"] {});
+
+		// good
+		RepositoryView view = getImportMetaDataRepository().getView("view");
+		QueryBuilder qb = view.getQueryBuilder();
+		QueryExpression property = qb.createPropertyQueryExpression("property");
+		QueryExpression value = qb.createConstantQueryExpression("value");
+		Query query = qb.createComparisonQuery(property, value, QueryBuilder.EQUALS);
+		RepositoryItem[] items = view.executeQuery(query);
+
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryPrefix/Name[@Image = 'RqlStatement.parseRqlStatement']
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+  <rule name="ServletUtilCurrentUserProfile" message="Avoid use of ServletUtil.getCurrentUserProfile()" class="net.sourceforge.pmd.lang.rule.XPathRule" language="java">
+    <priority>4</priority>
+    <example>
+		// bad
+		RepositoryItem profile = ServletUtil.getCurrentUserProfile();
+
+		// good
+		Profile profile = getProfileServices().getCurrentProfile();
+    </example>
+    <properties>
+      <property name="xpath">
+        <value>
+        	<![CDATA[
+				//PrimaryPrefix/Name[@Image = 'ServletUtil.getCurrentUserProfile']
+			]]>
+		</value>
+      </property>
+    </properties>
+  </rule>
+
+</ruleset>
