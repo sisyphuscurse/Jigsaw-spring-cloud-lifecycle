@@ -11,6 +11,9 @@
             <column name="uid" type="int">
                 <constraints nullable="false"/>
             </column>
+            <column name="version" type="int">
+                <constraints nullable="false"/>
+            </column>
             <column name="create_time" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
