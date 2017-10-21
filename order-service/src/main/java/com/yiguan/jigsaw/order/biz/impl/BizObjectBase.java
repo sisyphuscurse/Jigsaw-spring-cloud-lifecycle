@@ -18,6 +18,7 @@ public class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>,
 
   protected BizObjectBase(E internalState) {
     this.internalState = internalState;
+    this.key = Optional.empty();
   }
 
   protected BizObjectBase(K key) {
