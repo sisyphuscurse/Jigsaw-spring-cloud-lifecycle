@@ -46,9 +46,8 @@ public class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>,
     return (B) this;
   }
 
-  public B remove() {
+  public void remove() {
     repository.delete(internalState);
-    return (B) this;
   }
 
   private void internalSave(E entity) {
