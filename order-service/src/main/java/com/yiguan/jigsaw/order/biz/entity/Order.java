@@ -10,10 +10,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Version;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "orders")
 @Getter
 @Setter
 public class Order implements Keyed<Long> {
