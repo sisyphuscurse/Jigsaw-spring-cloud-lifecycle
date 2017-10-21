@@ -1,5 +1,6 @@
 package com.yiguan.jigsaw.order.service;
 
+import com.yiguan.jigsaw.order.biz.BizObject;
 import com.yiguan.jigsaw.order.biz.OrderBO;
 import com.yiguan.jigsaw.order.service.args.OrderCreationReq;
 import com.yiguan.jigsaw.order.service.args.OrderCreationResp;
@@ -23,13 +24,13 @@ public class OrderService {
 
   @RequestMapping(value = "orders", method = RequestMethod.POST, headers = "Accept=application/json")
   public OrderCreationResp createOrder(OrderCreationReq request) {
-    return createOrderBean(request)
+    return createBO(OrderBO.class, request)
         .save()
         .into(OrderCreationResp.class);
   }
 
-  private OrderBO createOrderBean(OrderCreationReq request) {
-    return context.getBean(OrderBO.class, request);
+  private <B extends BizObject<B>, ConstructorArgs> B createBO(Class<B> bClass, ConstructorArgs... request) {
+    return context.getBean(bClass, request);
   }
 
 }
