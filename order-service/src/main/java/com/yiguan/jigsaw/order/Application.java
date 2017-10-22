@@ -9,12 +9,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableAutoConfiguration
-@ComponentScan //Duplicated with EnableAutoConfiguration
+@ComponentScan(basePackages = {"com.yiguan"}) //Duplicated with EnableAutoConfiguration
 @EnableCircuitBreaker
 @EnableFeignClients
 @EnableSwagger2
 @EnableJpaRepositories(basePackages = "com.yiguan.jigsaw.order.biz.repo")
 public class Application {
+
+
+
   public static void main(String[] args) {
 
     SpringApplication.run(Application.class, args);

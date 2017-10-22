@@ -1,4 +1,6 @@
 package com.yiguan.jigsaw.order.service.event.outbound;
 
-public interface OrderLifecycleEvent {
+import com.yiguan.core.messaging.StateChangeEvent;
+
+public interface OrderLifecycleEvent extends StateChangeEvent {
 }

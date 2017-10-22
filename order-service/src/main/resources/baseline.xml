@@ -5,20 +5,20 @@
 
     <changeSet id="create order table" author="Leo">
         <createTable tableName="orders">
-            <column name="oid" type="int" autoIncrement="true">
+            <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="uid" type="int">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="version" type="int">
                 <constraints nullable="false"/>
             </column>
             <column name="create_time" type="varchar(20)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="total_price" type="decimal(10,2)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
             <column name="state" type="varchar(20)"/>
         </createTable>
