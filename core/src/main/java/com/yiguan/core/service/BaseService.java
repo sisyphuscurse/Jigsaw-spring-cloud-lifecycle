@@ -11,4 +11,8 @@ public class BaseService {
   protected <B extends BizObject<B>> B create(Class<B> bClass, Object... request) {
     return context.getBean(bClass, request);
   }
+
+  protected <B extends BizObject<B>> B load(Class<B> bClass, Object... request) {
+    return create(bClass, request);
+  }
 }

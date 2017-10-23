@@ -31,11 +31,10 @@ public class OrderService extends BaseService {
 
   @RequestMapping(value = "paidOrders", method = RequestMethod.POST, headers = "Accept=application/json")
   public OrderCreationResp setOrderPaid(PaymentNotification payment) {
-    return create(OrderBO.class, payment.getOutTradeNo())
+    return load(OrderBO.class, payment.getOutTradeNo())
         .orderPaid(new OrderPaid())
         .into(OrderCreationResp.class);
   }
-
 
 
 }

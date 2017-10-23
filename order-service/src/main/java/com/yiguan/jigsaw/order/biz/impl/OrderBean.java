@@ -1,6 +1,5 @@
 package com.yiguan.jigsaw.order.biz.impl;
 
-import com.google.common.eventbus.Subscribe;
 import com.yiguan.core.biz.BizObjectBase;
 import com.yiguan.jigsaw.order.biz.OrderBO;
 import com.yiguan.jigsaw.order.biz.OrderStatus;
@@ -58,21 +57,18 @@ public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements 
 
   @Override
   @Event
-  @Subscribe
   public OrderBO orderPaid(OrderPaid orderPaidEvent) {
     return this;
   }
 
   @Override
   @Event
-  @Subscribe
   public OrderBO shippingStarted(ArtifactShippingStarted shippingStartedEvent) {
     return this;
   }
 
   @Override
   @Event
-  @Subscribe
   public OrderBO signedByCustomer(ArtifactSigned artifactSignedEvent) {
     return this;
   }
