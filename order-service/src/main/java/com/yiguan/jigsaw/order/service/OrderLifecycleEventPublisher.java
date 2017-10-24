@@ -22,6 +22,7 @@ import java.util.function.Predicate;
 public class OrderLifecycleEventPublisher {
 
 
+  public static final String ORDER_STATE_CHANGE_TOPIC = "orderStateChangeTopic";
   @Autowired
   private KafkaClient kafkaClient;
   @Autowired
@@ -43,7 +44,7 @@ public class OrderLifecycleEventPublisher {
 
   private Function<OrderLifecycleEvent, Void> notifyDownstream() {
     return theEvent -> {
-      kafkaClient.postNotification(theEvent);
+      kafkaClient.postNotification(ORDER_STATE_CHANGE_TOPIC, theEvent);
       return null;
     };
   }

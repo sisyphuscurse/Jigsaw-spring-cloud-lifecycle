@@ -22,14 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Scope(BeanDefinition.SCOPE_SINGLETON)
 public class OrderService extends BaseService {
 
-  @RequestMapping(value = "orders", method = RequestMethod.POST, headers = "Accept=application/json")
+  @RequestMapping(value = "orders", method = RequestMethod.POST)
   public OrderCreationResp createOrder(OrderCreationReq request) {
     return create(OrderBO.class, request)
         .save()
         .into(OrderCreationResp.class);
   }
 
-  @RequestMapping(value = "paidOrders", method = RequestMethod.POST, headers = "Accept=application/json")
+  @RequestMapping(value = "paidOrders", method = RequestMethod.POST)
   public OrderCreationResp setOrderPaid(PaymentNotification payment) {
     return load(OrderBO.class, payment.getOutTradeNo())
         .orderPaid(new OrderPaid())
