@@ -85,4 +85,10 @@ public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements 
     return this;
   }
 
+  @PostStateChange(to=PaymentSuccess.class, observableName="PaymentExec")
+  public void onPayingSuccess(LifecycleContext<PaymentExec, PaymentState> context) {
+    PaymentExec exec = context.getReactiveObject();
+    orderPaid(orderPaidevent);
+  }
+
 }

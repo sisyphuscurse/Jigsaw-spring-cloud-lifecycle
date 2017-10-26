@@ -9,6 +9,7 @@
   <modules>
     <module>core</module>
     <module>order-service</module>
+    <module>coordernator-service</module>
   </modules>
   <packaging>pom</packaging>
 
