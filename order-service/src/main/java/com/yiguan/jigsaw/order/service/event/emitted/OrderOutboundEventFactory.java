@@ -1,4 +1,4 @@
-package com.yiguan.jigsaw.order.service.event.outbound;
+package com.yiguan.jigsaw.order.service.event.emitted;
 
 import com.yiguan.jigsaw.order.biz.OrderStatus;
 import com.yiguan.jigsaw.order.biz.impl.OrderBean;

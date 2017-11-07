@@ -1,4 +1,4 @@
-package com.yiguan.jigsaw.order.service.event.outbound;
+package com.yiguan.jigsaw.order.service.event.emitted;
 
 public class OrderPaid implements OrderLifecycleEvent {
 }

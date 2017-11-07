@@ -1,11 +1,14 @@
 package com.yiguan.jigsaw.order.service;
 
+import com.google.common.eventbus.Subscribe;
 import com.yiguan.core.service.BaseService;
 import com.yiguan.jigsaw.order.biz.OrderBO;
 import com.yiguan.jigsaw.order.service.argument.OrderCreationReq;
 import com.yiguan.jigsaw.order.service.argument.OrderCreationResp;
 import com.yiguan.jigsaw.order.service.argument.PaymentNotification;
-import com.yiguan.jigsaw.order.service.event.outbound.OrderPaid;
+import com.yiguan.jigsaw.order.service.event.consumed.ArtifactShippingStarted;
+import com.yiguan.jigsaw.order.service.event.consumed.ArtifactSigned;
+import com.yiguan.jigsaw.order.service.event.emitted.OrderPaid;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -36,5 +39,15 @@ public class OrderService extends BaseService {
         .into(OrderCreationResp.class);
   }
 
+  @Subscribe
+  public void onArtifactShippingStarted(ArtifactShippingStarted shippingStarted) {
+    load(OrderBO.class, shippingStarted.getOrderId())
+        .shippingStarted(shippingStarted);
+  }
 
+  @Subscribe
+  public void onArtifactSignedByCustomer(ArtifactSigned artifactSigned) {
+    load(OrderBO.class, artifactSigned.getOrderId())
+        .signedByCustomer(artifactSigned);
+  }
 }

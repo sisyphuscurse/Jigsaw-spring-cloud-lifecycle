@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>, K extends Serializable> {
+public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>, K extends Serializable> {
   private static final ExecutorService lifecycleEventHanlderThreadPool = Executors.newFixedThreadPool(4);
   private static final ModelMapper mapper = new ModelMapper();
   protected CrudRepository<E, K> repository;
@@ -33,6 +33,9 @@ public class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>,
     this.initializeInitialState();
   }
 
+  public void setRepository(CrudRepository<E, K> r) {
+    this.repository = r;
+  }
 
   protected BizObjectBase(K key) {
     this.key = Optional.of(key);

@@ -1,7 +1,7 @@
 package com.yiguan.jigsaw.order.service.event;
 
 import com.google.common.eventbus.EventBus;
-import com.yiguan.jigsaw.order.service.event.inbound.ArtifactShippingStarted;
+import com.yiguan.jigsaw.order.service.event.consumed.ArtifactShippingStarted;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
