@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableCircuitBreaker
 @EnableFeignClients
 @EnableSwagger2
-@EnableJpaRepositories(basePackages = "com.yiguan.jigsaw.order.biz.repo")
+@EnableJpaRepositories(basePackages = "com.yiguan.jigsaw.order.repositories")
 public class Application {
 
 
