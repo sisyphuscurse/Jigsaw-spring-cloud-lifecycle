@@ -58,7 +58,7 @@ public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements 
   @Override
   @Event(value = OrderFSM.Events.OrderPaid.class)
   public OrderBO notifyPaid(OrderPaid orderPaidEvent) {
-    throw new NullPointerException();
+    return this;
   }
 
   @Override
