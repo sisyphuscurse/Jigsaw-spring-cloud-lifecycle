@@ -4,6 +4,7 @@ import com.yiguan.jigsaw.order.domain.OrderStatus;
 import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.repositories.OrderRepository;
 import net.imadz.lifecycle.LifecycleException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -15,6 +16,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class OrderBeanTest extends BizObjectTest {
   @Test(expected = LifecycleException.class)
+  @Ignore
   public void demo() throws Throwable {
     Order orderInternalState = new Order();
     orderInternalState.setId(1L);

@@ -12,6 +12,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import java.math.BigDecimal;
 
@@ -46,4 +47,8 @@ public class Order implements Keyed<Long> {
   public Long getKey() {
     return id;
   }
+
+
+  @Transient
+  private Payment payment;
 }

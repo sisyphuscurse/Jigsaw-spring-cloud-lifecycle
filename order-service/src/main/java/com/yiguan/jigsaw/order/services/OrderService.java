@@ -10,6 +10,7 @@ import com.yiguan.jigsaw.order.services.argument.ShipmentNotificationReq;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactSigned;
 import com.yiguan.jigsaw.order.services.event.emitted.OrderPaid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Scope(BeanDefinition.SCOPE_SINGLETON)
 public class OrderService extends BaseService {
 
+  // TODO: 08/11/2017
+  protected static final ModelMapper mapper = new ModelMapper();
+
+
   @RequestMapping(value = "orders", method = RequestMethod.POST)
   public OrderCreationResp createOrder(OrderCreationReq request) {
     return create(OrderBO.class, request)
@@ -35,8 +40,10 @@ public class OrderService extends BaseService {
 
   @RequestMapping(value = "paidOrders", method = RequestMethod.POST)
   public OrderCreationResp setOrderPaid(PaymentNotificationReq payment) {
-    return load(OrderBO.class, payment.getOutTradeNo())
-        .notifyPaid(new OrderPaid())
+
+    final OrderPaid orderPaidEvent = mapper.map(payment, OrderPaid.class);
+    return load(OrderBO.class, payment.getOid())
+        .notifyPaid(orderPaidEvent)
         .into(OrderCreationResp.class);
   }
 

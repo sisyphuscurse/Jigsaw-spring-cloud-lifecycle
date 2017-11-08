@@ -5,7 +5,7 @@
 
     <changeSet id="create order table" author="Leo">
         <createTable tableName="orders">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="uid" type="int">
@@ -26,7 +26,7 @@
 
     <changeSet id="create order item table" author="Leo">
         <createTable tableName="order_items">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="oid" type="int">
@@ -47,10 +47,10 @@
 
     <changeSet id="create payments table" author="Leo">
         <createTable tableName="payments">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="oid" type="int">
+            <column name="oid" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="payment_id" type="varchar(50)">
@@ -64,7 +64,7 @@
 
     <changeSet id="create shipments table" author="Leo">
         <createTable tableName="shipments">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="oid" type="int">
@@ -93,7 +93,7 @@
 
     <changeSet id="create order_cancellation table" author="Leo">
         <createTable tableName="order_cancellation">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="oid" type="int">

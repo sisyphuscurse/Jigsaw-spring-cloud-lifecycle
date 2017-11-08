@@ -14,7 +14,7 @@ public class BizObjectTest {
   protected <B extends BizObjectBase<B, E, K>, E extends Keyed<K>, K extends Serializable> B createBizBean(Class<B> tClass, K key, CrudRepository<E, K> repository ) {
     try {
       final BizObjectBase<B, E, K> object = tClass.getConstructor(key.getClass()).newInstance(key);
-      object.setRepository(repository);
+      //object.setRepository(repository);
       final Method initialize = BizObjectBase.class.getDeclaredMethod("initialize");
       initialize.setAccessible(true);
       initialize.invoke(object);

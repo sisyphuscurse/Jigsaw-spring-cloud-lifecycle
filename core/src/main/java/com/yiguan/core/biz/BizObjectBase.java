@@ -10,7 +10,6 @@ import net.imadz.lifecycle.annotations.ReactiveObject;
 import net.imadz.lifecycle.annotations.callback.PostStateChange;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
@@ -20,8 +19,7 @@ import java.util.concurrent.Executors;
 
 public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>, K extends Serializable> {
   private static final ExecutorService lifecycleEventHanlderThreadPool = Executors.newFixedThreadPool(4);
-  private static final ModelMapper mapper = new ModelMapper();
-  protected CrudRepository<E, K> repository;
+  protected static final ModelMapper mapper = new ModelMapper();
   protected E internalState;
   private Optional<K> key;
   @Autowired
@@ -33,10 +31,6 @@ public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends 
     this.initializeInitialState();
   }
 
-  public void setRepository(CrudRepository<E, K> r) {
-    this.repository = r;
-  }
-
   protected BizObjectBase(K key) {
     this.key = Optional.of(key);
   }
@@ -44,12 +38,16 @@ public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends 
   @PostConstruct
   protected void initialize() {
     if (null == internalState) {
-      internalState = repository.findOne(key.get());
+      internalState = findOne(key.get());
     }
   }
 
   public <T> T into(Class<T> targetType) {
     return mapper.map(internalState, targetType);
+  }
+
+  public <T> T from(Object source, Class<T> targetType) {
+    return mapper.map(source, targetType);
   }
 
   @PostStateChange
@@ -64,17 +62,11 @@ public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends 
     });
   }
 
-  public B save() {
-    internalSave(internalState);
-    return (B) this;
-  }
-
-  public void remove() {
-    repository.delete(internalState);
-  }
+  public abstract E save(E e);
+  public abstract E findOne(K k);
 
   private void internalSave(E entity) {
-    repository.save(entity);
+    save(entity);
     key = Optional.of(key.orElse(internalState.getKey()));
   }
 

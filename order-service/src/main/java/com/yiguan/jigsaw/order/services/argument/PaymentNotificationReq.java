@@ -6,5 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PaymentNotificationReq {
-  private Long outTradeNo;
+  private Long oid;
+
+  private String paymentId;
+
+  private String paymentTime;
 }
