@@ -1,15 +1,14 @@
-package com.yiguan.jigsaw.order.services.event;
+package com.yiguan.jigsaw.order.services;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.eventbus.EventBus;
+import com.yiguan.core.kafka.message.IMessageHandler;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
-@Scope(BeanDefinition.SCOPE_SINGLETON)
-public class KafkaSubscriber {
+public class OrderMessageSubscriber implements IMessageHandler {
 
   @Autowired
   private EventBus eventBus;
@@ -27,6 +26,14 @@ public class KafkaSubscriber {
     return new ArtifactShippingStarted();
   }
 
+  @Override
+  public boolean handle(String topic, Object message) {
+    onMessage((Message) JSON.parse(message.toString()));
+    return false;
+  }
 
-  public static interface Message { String messageId(); }
+
+  public static interface Message {
+    String messageId();
+  }
 }

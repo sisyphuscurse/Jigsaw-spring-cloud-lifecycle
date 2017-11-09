@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -112,6 +113,7 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
   // TODO: 08/11/2017 should be delete with OrderBO
   @Override
   public OrderBO save() {
+    internalState.setCreateTime(simpleDateFormat.format(new Date()));
     save(internalState);
     return this;
   }

@@ -62,38 +62,40 @@ public class KafkaMessageConsumer implements IMessageConsumer {
 			return false;
 		}
 		executor = Executors.newFixedThreadPool(threadNum);
-      new Thread(new Runnable() {
-        public void run() {
-          try {
-            consumer = new KafkaConsumer<String, String>(configs);
-            consumer.subscribe(Arrays.asList(topicHandlerMap.keySet().toArray(new String[0])));
-            while (!stopped.get()) {
-              ConsumerRecords<String, String> records = consumer.poll(10000);
-                for (final ConsumerRecord<String, String> record : records) {
-                  executor.submit(new Runnable() {
-                    public void run() {
-                      IMessageHandler handler = topicHandlerMap.get(record.topic());
-                      if (handler == null) {
-                        logger.error("no handler, topic:{}, message:{}", record.topic(), record.value());
-                        return;
-                      }
-                      try {
-                        handler.handle(record.topic(), record.value());
-                      } catch (Exception e) {
-                        logger.error("handle message failed. topic:{}, message:{}", record.topic(), record.value(), e);
-                      }
-                    }
-                  });
-                }
-            }
-          } catch (WakeupException e) {
-            // Ignore exception if closing
-            if (!stopped.get()) throw e;
-          } finally {
-            consumer.close();
-          }
-        }
-      }, "Kafka-consumer-thread").start();
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					consumer = new KafkaConsumer<String, String>(configs);
+					consumer.subscribe(Arrays.asList(topicHandlerMap.keySet().toArray(new String[0])));
+					while (!stopped.get()) {
+						ConsumerRecords<String, String> records = consumer.poll(10000);
+						for (final ConsumerRecord<String, String> record : records) {
+							executor.submit(new Runnable() {
+								public void run() {
+									IMessageHandler handler = topicHandlerMap.get(record.topic());
+									if (handler == null) {
+										logger.error("no handler, topic:{}, message:{}", record.topic(), record.value());
+										return;
+									}
+									try {
+										handler.handle(record.topic(), record.value());
+									} catch (Exception e) {
+										logger.error("handle message failed. topic:{}, message:{}", record.topic(), record.value(), e);
+									}
+								}
+							});
+						}
+					}
+				} catch (WakeupException e) {
+					// Ignore exception if closing
+					if (!stopped.get()) {
+						throw e;
+					}
+				} finally {
+					consumer.close();
+				}
+			}
+		}, "Kafka-consumer-thread").start();
 		return true;
 	}
 

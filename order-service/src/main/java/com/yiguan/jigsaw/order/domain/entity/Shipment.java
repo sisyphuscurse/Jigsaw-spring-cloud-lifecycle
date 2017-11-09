@@ -30,6 +30,8 @@ public class Shipment {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
+  private Long oid;
+
   @Column(nullable = false, name = "shipping_id")
   private String shippingId;
 
