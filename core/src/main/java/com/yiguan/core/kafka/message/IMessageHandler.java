@@ -5,5 +5,5 @@ package com.yiguan.core.kafka.message;
  */
 @FunctionalInterface
 public interface IMessageHandler {
-	boolean handle(String topic, Object message);
+	boolean handle(String topic, String message);
 }
