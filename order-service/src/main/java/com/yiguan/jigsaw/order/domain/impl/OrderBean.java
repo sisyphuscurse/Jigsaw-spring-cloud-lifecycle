@@ -10,6 +10,7 @@ import com.yiguan.jigsaw.order.domain.fsm.OrderFSM;
 import com.yiguan.jigsaw.order.domain.fsm.OrderStatusConverter;
 import com.yiguan.jigsaw.order.repositories.OrderRepository;
 import com.yiguan.jigsaw.order.repositories.PaymentRepository;
+import com.yiguan.jigsaw.order.repositories.ShipmentRepository;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactSigned;
 import com.yiguan.jigsaw.order.services.event.emitted.OrderPaid;
@@ -37,6 +38,7 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
 
   private PaymentRepository paymentRepository;
   private OrderRepository repository;
+  private ShipmentRepository shipmentRepository;
 
   @Autowired
   public void setRepository(OrderRepository repository) {
@@ -46,6 +48,11 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
   @Autowired
   public void setPaymentRepository(PaymentRepository paymentRepository) {
     this.paymentRepository = paymentRepository;
+  }
+
+  @Autowired
+  public void setShipmentRepository(ShipmentRepository shipmentRepository) {
+    this.shipmentRepository = shipmentRepository;
   }
 
   @SuppressWarnings("PMD")
@@ -112,9 +119,15 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
   @Override
   public Order save(Order order) {
     repository.save(order);
+
     if (Objects.nonNull(order.getPayment())) {
       paymentRepository.save(order.getPayment());
     }
+
+    if (Objects.nonNull(order.getShipment())) {
+      shipmentRepository.save(order.getShipment());
+    }
+
     return order;
   }
 
@@ -122,6 +135,7 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
   public Order findOne(Long id) {
     final Order order = repository.findOne(id);
     order.setPayment(paymentRepository.findByOid(order.getId()));
+    order.setShipment(shipmentRepository.findByOid(order.getId()));
     return order;
   }
 
@@ -129,4 +143,5 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
   public Order onStateChanged(Order order) {
     return null;
   }
+
 }

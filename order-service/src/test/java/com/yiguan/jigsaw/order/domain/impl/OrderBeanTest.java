@@ -4,6 +4,7 @@ import com.yiguan.jigsaw.order.domain.OrderStatus;
 import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.repositories.OrderRepository;
 import com.yiguan.jigsaw.order.repositories.PaymentRepository;
+import com.yiguan.jigsaw.order.repositories.ShipmentRepository;
 import net.imadz.lifecycle.LifecycleException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,9 @@ public class OrderBeanTest extends AggregateRootTest {
   @Mock
   private PaymentRepository paymentRepository;
 
+  @Mock
+  private ShipmentRepository shipmentRepository;
+
   @Test(expected = LifecycleException.class)
   public void demo() throws Throwable {
     Order orderInternalState = new Order();
@@ -28,7 +32,7 @@ public class OrderBeanTest extends AggregateRootTest {
     orderInternalState.setState(OrderStatus.Created);
 
     when(repository.findOne(1L)).thenReturn(orderInternalState);
-    final OrderBean orderBean = createBizBean(OrderBean.class, 1L, repository, paymentRepository);
+    final OrderBean orderBean = createBizBean(OrderBean.class, 1L, repository, paymentRepository, shipmentRepository);
 
     try {
       orderBean.acceptOrder();
