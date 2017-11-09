@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public class ArtifactSigned implements LogisticLifecycleEvent {
-  private Long orderId;
+  private Long oid;
 }

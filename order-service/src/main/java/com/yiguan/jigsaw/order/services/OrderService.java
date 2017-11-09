@@ -7,7 +7,6 @@ import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.services.argument.OrderCreationReq;
 import com.yiguan.jigsaw.order.services.argument.OrderCreationResp;
 import com.yiguan.jigsaw.order.services.argument.PaymentNotificationReq;
-import com.yiguan.jigsaw.order.services.argument.ShipmentNotificationReq;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactSigned;
 import com.yiguan.jigsaw.order.services.event.emitted.OrderPaid;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Transactional
 public class OrderService extends DomainService {
 
-  // TODO: 08/11/2017
   @RequestMapping(value = "orders", method = RequestMethod.POST)
   public OrderCreationResp createOrder(OrderCreationReq request) {
     final Order order = mapper.map(request, Order.class);
@@ -33,11 +31,10 @@ public class OrderService extends DomainService {
         .into(OrderCreationResp.class);
   }
 
-  @RequestMapping(value = "paidOrders", method = RequestMethod.POST)
+  @RequestMapping(value = "notifyOrderPaid", method = RequestMethod.POST)
   public OrderCreationResp notifyOrderPaid(PaymentNotificationReq payment) {
 
     final OrderPaid orderPaidEvent = mapper.map(payment, OrderPaid.class);
-
     final OrderBO orderBO = load(OrderBO.class, payment.getOid());
 
     orderBO.notifyPaid(orderPaidEvent);
@@ -45,24 +42,15 @@ public class OrderService extends DomainService {
     return orderBO.into(OrderCreationResp.class);
   }
 
-
-  @RequestMapping(value = "notifyShippingStarted", method = RequestMethod.POST)
-  public OrderCreationResp notifyShippingStarted(ShipmentNotificationReq shipment) {
-    return load(OrderBO.class, shipment.getOutTradeNo())
-        .notifyPaid(new OrderPaid())
-        .into(OrderCreationResp.class);
-  }
-
-
   @Subscribe
   public void onArtifactShippingStarted(ArtifactShippingStarted shippingStarted) {
-    load(OrderBO.class, shippingStarted.getOrderId())
-        .shippingStarted(shippingStarted);
+    load(OrderBO.class, shippingStarted.getOid())
+        .notifyShippingStarted(shippingStarted);
   }
 
   @Subscribe
   public void onArtifactSignedByCustomer(ArtifactSigned artifactSigned) {
-    load(OrderBO.class, artifactSigned.getOrderId())
-        .signedByCustomer(artifactSigned);
+    load(OrderBO.class, artifactSigned.getOid())
+        .sign(artifactSigned);
   }
 }

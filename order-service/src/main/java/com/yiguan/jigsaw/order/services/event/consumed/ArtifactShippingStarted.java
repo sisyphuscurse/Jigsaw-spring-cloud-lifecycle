@@ -6,5 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ArtifactShippingStarted implements LogisticLifecycleEvent {
-  private Long orderId;
+  private Long oid;
+
+  private String shippingId;
+
+  private String shippingTime;
 }

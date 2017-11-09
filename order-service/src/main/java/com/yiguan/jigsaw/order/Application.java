@@ -16,8 +16,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableJpaRepositories(basePackages = "com.yiguan.jigsaw.order.repositories")
 public class Application {
 
-
-
   public static void main(String[] args) {
 
     SpringApplication.run(Application.class, args);

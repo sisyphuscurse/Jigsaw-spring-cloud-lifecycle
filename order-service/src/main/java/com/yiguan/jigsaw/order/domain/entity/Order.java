@@ -51,4 +51,7 @@ public class Order implements Keyed<Long> {
 
   @Transient
   private Payment payment;
+
+  @Transient
+  private Shipment shipment;
 }

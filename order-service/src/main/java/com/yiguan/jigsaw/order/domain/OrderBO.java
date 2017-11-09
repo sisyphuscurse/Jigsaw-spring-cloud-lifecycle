@@ -10,12 +10,12 @@ public interface OrderBO extends DomainObject<OrderBO> {
 
   OrderBO notifyPaid(OrderPaid orderPaidEvent);
 
-  OrderBO shippingStarted(ArtifactShippingStarted shippingStartedEvent);
+  OrderBO notifyShippingStarted(ArtifactShippingStarted shippingStartedEvent);
 
-  OrderBO signedByCustomer(ArtifactSigned artifactSignedEvent);
+  OrderBO sign(ArtifactSigned artifactSignedEvent);
 
-  OrderBO accept();
+  OrderBO acceptOrder();
 
-  OrderBO cancel();
+  OrderBO cancelOrder();
 
 }

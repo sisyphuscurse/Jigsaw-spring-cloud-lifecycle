@@ -5,6 +5,7 @@ import com.yiguan.jigsaw.order.domain.OrderBO;
 import com.yiguan.jigsaw.order.domain.OrderStatus;
 import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.domain.entity.Payment;
+import com.yiguan.jigsaw.order.domain.entity.Shipment;
 import com.yiguan.jigsaw.order.domain.fsm.OrderFSM;
 import com.yiguan.jigsaw.order.domain.fsm.OrderStatusConverter;
 import com.yiguan.jigsaw.order.repositories.OrderRepository;
@@ -76,27 +77,28 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
     return this;
   }
 
-  @Override
-  @Event
-  public OrderBO shippingStarted(ArtifactShippingStarted shippingStartedEvent) {
+  @Event(value = OrderFSM.Events.ShippingStarted.class)
+  public OrderBO notifyShippingStarted(ArtifactShippingStarted shippingStartedEvent) {
+    Shipment shipment = map(shippingStartedEvent, Shipment.class);
+    internalState.setShipment(shipment);
     return this;
   }
 
   @Override
-  @Event
-  public OrderBO signedByCustomer(ArtifactSigned artifactSignedEvent) {
+  @Event(value = OrderFSM.Events.SignedByCustomer.class)
+  public OrderBO sign(ArtifactSigned artifactSignedEvent) {
     return this;
   }
 
   @Override
-  @Event
-  public OrderBO accept() {
+  @Event(value = OrderFSM.Events.Accept.class)
+  public OrderBO acceptOrder() {
     return this;
   }
 
   @Override
-  @Event
-  public OrderBO cancel() {
+  @Event(value = OrderFSM.Events.Cancel.class)
+  public OrderBO cancelOrder() {
     return this;
   }
 

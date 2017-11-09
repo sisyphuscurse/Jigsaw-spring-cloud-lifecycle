@@ -67,7 +67,7 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="oid" type="int">
+            <column name="oid" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="shipping_id" type="varchar(50)">
