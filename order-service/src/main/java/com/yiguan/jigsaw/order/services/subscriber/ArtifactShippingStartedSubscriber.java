@@ -1,17 +1,16 @@
-package com.yiguan.jigsaw.order.services;
+package com.yiguan.jigsaw.order.services.subscriber;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.eventbus.EventBus;
 import com.yiguan.core.kafka.message.IMessageHandler;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
-import com.yiguan.jigsaw.order.services.event.consumed.LogisticLifecycleEvent;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderMessageSubscriber implements IMessageHandler {
+public class ArtifactShippingStartedSubscriber implements IMessageHandler {
 
   @Autowired
   private EventBus eventBus;
@@ -21,13 +20,13 @@ public class OrderMessageSubscriber implements IMessageHandler {
   }
 
   public void onMessage(OrderMessage kafkaMessage) {
-    final LogisticLifecycleEvent event = populateInboundMessage(kafkaMessage);
+    final ArtifactShippingStarted event = populateInboundMessage(kafkaMessage);
     eventBus.post(event);
   }
 
-  private LogisticLifecycleEvent populateInboundMessage(OrderMessage kafkaMessage) {
+  private ArtifactShippingStarted populateInboundMessage(OrderMessage kafkaMessage) {
 
-    return JSON.parseObject(kafkaMessage.getEventData(), ArtifactShippingStarted.class);
+    return JSON.parseObject(kafkaMessage.getMessage(), ArtifactShippingStarted.class);
   }
 
   @Override
@@ -40,10 +39,8 @@ public class OrderMessageSubscriber implements IMessageHandler {
   @Getter
   @Setter
   public static class OrderMessage {
-    private String eventType;
-    private String eventData;
+    private String message;
   }
-
 
 
 }
