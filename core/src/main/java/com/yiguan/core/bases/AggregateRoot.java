@@ -36,7 +36,7 @@ public abstract class AggregateRoot<B extends AggregateRoot<B, E, K>, E extends 
   }
 
   @PostConstruct
-  protected void initialize() {
+  private void initialize() {
     if (null == internalState) {
       internalState = findOne(key.get());
     }
