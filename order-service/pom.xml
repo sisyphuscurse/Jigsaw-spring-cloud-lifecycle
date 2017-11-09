@@ -50,7 +50,7 @@
             <imageTag>docker.mock</imageTag>
           </imageTags>
           <baseImage>10.232.128.157:5000/yiguan/alpine-oraclejdk8:latest</baseImage>
-          <!-- copy the service's jar file from target into the root directory of the image -->
+          <!-- copy the service's jar file map target into the root directory of the image -->
           <resources>
             <resource>
               <targetPath>/work</targetPath>

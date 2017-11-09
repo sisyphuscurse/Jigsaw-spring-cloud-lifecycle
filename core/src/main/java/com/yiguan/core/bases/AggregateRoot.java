@@ -1,4 +1,4 @@
-package com.yiguan.core.biz;
+package com.yiguan.core.bases;
 
 import com.google.common.eventbus.EventBus;
 import com.yiguan.core.messaging.AppLifecycleEvent;
@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends Keyed<K>, K extends Serializable> {
+public abstract class AggregateRoot<B extends AggregateRoot<B, E, K>, E extends Keyed<K>, K extends Serializable> {
   private static final ExecutorService lifecycleEventHanlderThreadPool = Executors.newFixedThreadPool(4);
   protected static final ModelMapper mapper = new ModelMapper();
   protected E internalState;
@@ -25,13 +25,13 @@ public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends 
   @Autowired
   private EventBus eventBus;
 
-  protected BizObjectBase(E internalState) {
+  protected AggregateRoot(E internalState) {
     this.internalState = internalState;
     this.key = Optional.empty();
     this.initializeInitialState();
   }
 
-  protected BizObjectBase(K key) {
+  protected AggregateRoot(K key) {
     this.key = Optional.of(key);
   }
 
@@ -46,7 +46,7 @@ public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends 
     return mapper.map(internalState, targetType);
   }
 
-  public <T> T from(Object source, Class<T> targetType) {
+  public <T> T map(Object source, Class<T> targetType) {
     return mapper.map(source, targetType);
   }
 
@@ -64,6 +64,7 @@ public abstract class BizObjectBase<B extends BizObjectBase<B, E, K>, E extends 
 
   public abstract E save(E e);
   public abstract E findOne(K k);
+  public abstract E onStateChanged(E e);
 
   private void internalSave(E entity) {
     save(entity);

@@ -1,6 +1,6 @@
 package com.yiguan.jigsaw.order.domain.impl;
 
-import com.yiguan.core.biz.BizObjectBase;
+import com.yiguan.core.bases.AggregateRoot;
 import com.yiguan.jigsaw.order.domain.OrderBO;
 import com.yiguan.jigsaw.order.domain.OrderStatus;
 import com.yiguan.jigsaw.order.domain.entity.Order;
@@ -9,7 +9,6 @@ import com.yiguan.jigsaw.order.domain.fsm.OrderFSM;
 import com.yiguan.jigsaw.order.domain.fsm.OrderStatusConverter;
 import com.yiguan.jigsaw.order.repositories.OrderRepository;
 import com.yiguan.jigsaw.order.repositories.PaymentRepository;
-import com.yiguan.jigsaw.order.services.argument.OrderCreationReq;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactSigned;
 import com.yiguan.jigsaw.order.services.event.emitted.OrderPaid;
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -32,30 +30,12 @@ import java.util.Objects;
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transactional
-public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements OrderBO {
+public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements OrderBO {
 
   private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
 
   private PaymentRepository paymentRepository;
   private OrderRepository repository;
-
-  @SuppressWarnings("PMD")
-  public OrderBean(OrderCreationReq order) {
-    super(populateOrder(order));
-  }
-
-  @SuppressWarnings("PMD")
-  private static Order populateOrder(OrderCreationReq req) {
-
-    final Order order = mapper.map(req, Order.class);
-    order.setCreateTime(simpleDateFormat.format(new Date()));
-    return order;
-  }
-
-  public OrderBean(Long oid) {
-    super(oid);
-  }
-
 
   @Autowired
   public void setRepository(OrderRepository repository) {
@@ -66,6 +46,16 @@ public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements 
   public void setPaymentRepository(PaymentRepository paymentRepository) {
     this.paymentRepository = paymentRepository;
   }
+
+  @SuppressWarnings("PMD")
+  public OrderBean(Order order) {
+    super(order);
+  }
+
+  public OrderBean(Long oid) {
+    super(oid);
+  }
+
 
   @StateIndicator
   @Converter(OrderStatusConverter.class)
@@ -81,7 +71,7 @@ public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements 
   @Override
   @Event(value = OrderFSM.Events.OrderPaid.class)
   public OrderBO notifyPaid(OrderPaid orderPaidEvent) {
-    Payment payment = from(orderPaidEvent, Payment.class);
+    Payment payment = map(orderPaidEvent, Payment.class);
     internalState.setPayment(payment);
     return this;
   }
@@ -131,5 +121,10 @@ public class OrderBean extends BizObjectBase<OrderBean, Order, Long> implements 
     final Order order = repository.findOne(id);
     order.setPayment(paymentRepository.findByOid(order.getId()));
     return order;
+  }
+
+  @Override
+  public Order onStateChanged(Order order) {
+    return null;
   }
 }
