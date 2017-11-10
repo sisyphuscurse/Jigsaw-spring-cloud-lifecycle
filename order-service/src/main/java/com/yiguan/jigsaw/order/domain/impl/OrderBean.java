@@ -159,9 +159,4 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> {
     return order;
   }
 
-  @Override
-  protected Order onStateChanged(Order order) {
-    return null;
-  }
-
 }

@@ -61,7 +61,6 @@ public abstract class AggregateRoot<B extends AggregateRoot<B, E, K>, E extends 
 
   protected abstract E save(E e);
   protected abstract E findOne(K k);
-  protected abstract E onStateChanged(E e);
 
   private void internalSave(E entity) {
     save(entity);
