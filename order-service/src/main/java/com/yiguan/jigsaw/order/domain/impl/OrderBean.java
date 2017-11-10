@@ -1,7 +1,6 @@
 package com.yiguan.jigsaw.order.domain.impl;
 
 import com.yiguan.core.bases.AggregateRoot;
-import com.yiguan.jigsaw.order.domain.OrderBO;
 import com.yiguan.jigsaw.order.domain.OrderStatus;
 import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.domain.entity.Payment;
@@ -11,9 +10,11 @@ import com.yiguan.jigsaw.order.domain.fsm.OrderStatusConverter;
 import com.yiguan.jigsaw.order.repositories.OrderRepository;
 import com.yiguan.jigsaw.order.repositories.PaymentRepository;
 import com.yiguan.jigsaw.order.repositories.ShipmentRepository;
+import com.yiguan.jigsaw.order.services.command.OrderCommand;
+import com.yiguan.jigsaw.order.services.command.OrderPaidCommand;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactSigned;
-import com.yiguan.jigsaw.order.services.event.emitted.OrderPaid;
+import com.yiguan.core.bases.ConsumedDomainEvent;
 import net.imadz.lifecycle.annotations.Event;
 import net.imadz.lifecycle.annotations.LifecycleMeta;
 import net.imadz.lifecycle.annotations.StateIndicator;
@@ -33,12 +34,12 @@ import java.util.Objects;
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transactional
-public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements OrderBO {
+public class OrderBean extends AggregateRoot<OrderBean, Order, Long> {
 
   private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
 
-  private PaymentRepository paymentRepository;
   private OrderRepository repository;
+  private PaymentRepository paymentRepository;
   private ShipmentRepository shipmentRepository;
 
   @Autowired
@@ -59,6 +60,7 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
   @SuppressWarnings("PMD")
   public OrderBean(Order order) {
     super(order);
+    internalState.setCreateTime(simpleDateFormat.format(new Date()));
   }
 
   public OrderBean(Long oid) {
@@ -77,49 +79,57 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
     this.internalState.setState(stateName);
   }
 
-  @Override
+  public void executeCommand(OrderCommand command) {
+    switch (command.getClass().getName()) {
+      case "CreateOrderCommand":
+        save(internalState);
+        break;
+      case "OrderPaidCommand":
+        notifyPaid((OrderPaidCommand) command);
+        break;
+    }
+  }
+
+  public void sendEvent(ConsumedDomainEvent domainEvent) {
+    switch (getClassName(domainEvent)) {
+      case "ArtifactShippingStarted":
+        notifyShippingStarted((ArtifactShippingStarted) domainEvent);
+        break;
+    }
+  }
+
+  private String getClassName(Object obj) {
+    final String name = obj.getClass().getName();
+    final String substring = name.substring(name.lastIndexOf('.') + 1);
+    return substring;
+  }
+
   @Event(value = OrderFSM.Events.OrderPaid.class)
-  public OrderBO notifyPaid(OrderPaid orderPaidEvent) {
-    Payment payment = map(orderPaidEvent, Payment.class);
+  private void notifyPaid(OrderPaidCommand orderPaidCommand) {
+    Payment payment = mapper.map(orderPaidCommand, Payment.class);
     internalState.setPayment(payment);
-    return this;
   }
 
   @Event(value = OrderFSM.Events.ShippingStarted.class)
-  public OrderBO notifyShippingStarted(ArtifactShippingStarted shippingStartedEvent) {
-    Shipment shipment = map(shippingStartedEvent, Shipment.class);
+  private void notifyShippingStarted(ArtifactShippingStarted shippingStartedEvent) {
+    Shipment shipment = mapper.map(shippingStartedEvent, Shipment.class);
     internalState.setShipment(shipment);
-    return this;
   }
 
-  @Override
   @Event(value = OrderFSM.Events.SignedByCustomer.class)
-  public OrderBO sign(ArtifactSigned artifactSignedEvent) {
-    return this;
+  private void signeture(ArtifactSigned artifactSignedEvent) {
   }
 
-  @Override
   @Event(value = OrderFSM.Events.Accept.class)
-  public OrderBO acceptOrder() {
-    return this;
+  private void acceptOrder() {
   }
 
-  @Override
   @Event(value = OrderFSM.Events.Cancel.class)
-  public OrderBO cancelOrder() {
-    return this;
-  }
-
-  // TODO: 08/11/2017 should be delete with OrderBO
-  @Override
-  public OrderBO save() {
-    internalState.setCreateTime(simpleDateFormat.format(new Date()));
-    save(internalState);
-    return this;
+  private void cancelOrder() {
   }
 
   @Override
-  public Order save(Order order) {
+  protected Order save(Order order) {
     repository.save(order);
 
     if (Objects.nonNull(order.getPayment())) {
@@ -130,11 +140,13 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
       shipmentRepository.save(order.getShipment());
     }
 
+    this.internalState = order;
+
     return order;
   }
 
   @Override
-  public Order findOne(Long id) {
+  protected Order findOne(Long id) {
     final Order order = repository.findOne(id);
     order.setPayment(paymentRepository.findByOid(order.getId()));
     order.setShipment(shipmentRepository.findByOid(order.getId()));
@@ -142,7 +154,7 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> implements 
   }
 
   @Override
-  public Order onStateChanged(Order order) {
+  protected Order onStateChanged(Order order) {
     return null;
   }
 

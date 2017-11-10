@@ -5,6 +5,7 @@ import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.repositories.OrderRepository;
 import com.yiguan.jigsaw.order.repositories.PaymentRepository;
 import com.yiguan.jigsaw.order.repositories.ShipmentRepository;
+import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import net.imadz.lifecycle.LifecycleException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,12 +31,13 @@ public class OrderBeanTest extends AggregateRootTest {
     Order orderInternalState = new Order();
     orderInternalState.setId(1L);
     orderInternalState.setState(OrderStatus.Created);
+    ArtifactShippingStarted artifactShippingStarted = new ArtifactShippingStarted(1L, "", "");
 
     when(repository.findOne(1L)).thenReturn(orderInternalState);
     final OrderBean orderBean = createBizBean(OrderBean.class, 1L, repository, paymentRepository, shipmentRepository);
 
     try {
-      orderBean.acceptOrder();
+      orderBean.sendEvent(artifactShippingStarted);
     } catch (LifecycleException ex) {
       if (null == ex.getCause()) {
         throw ex;

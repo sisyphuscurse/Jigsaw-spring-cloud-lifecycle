@@ -7,7 +7,12 @@ import java.math.BigDecimal;
 
 @Getter
 @Setter
-public class CreateOrderCommand {
+public class CreateOrderCommand implements OrderCommand {
   private Integer uid;
   private BigDecimal totalPrice;
+
+  @Override
+  public String getCommandName() {
+    return CreateOrderCommand.class.getName();
+  }
 }

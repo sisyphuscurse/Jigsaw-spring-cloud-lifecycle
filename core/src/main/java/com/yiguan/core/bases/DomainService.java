@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 public class DomainService {
 
   @Autowired
-  private ApplicationContext context;
+  protected ApplicationContext context;
 
   protected static final ModelMapper mapper = new ModelMapper();
 

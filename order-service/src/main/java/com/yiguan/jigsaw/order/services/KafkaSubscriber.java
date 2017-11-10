@@ -7,14 +7,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaSubscriber {
-
-  public static final String ORDER_ARTIFACT_SHIPPING_STARTED = "Order.ArtifactShippingStarted";
-
-
   @Autowired
-  public KafkaSubscriber(KafkaMessageConsumer kafkaMessageConsumer, ArtifactShippingStartedSubscriber artifactShippingStartedSubscriber) {
-    kafkaMessageConsumer.consume(ORDER_ARTIFACT_SHIPPING_STARTED, artifactShippingStartedSubscriber);
-
+  public KafkaSubscriber(KafkaMessageConsumer kafkaMessageConsumer,
+                         ArtifactShippingStartedSubscriber artifactShippingStartedSubscriber) {
+    artifactShippingStartedSubscriber.subscribe(kafkaMessageConsumer);
     kafkaMessageConsumer.start();
   }
 }

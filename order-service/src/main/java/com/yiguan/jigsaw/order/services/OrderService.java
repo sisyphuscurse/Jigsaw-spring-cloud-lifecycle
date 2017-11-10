@@ -4,9 +4,11 @@ import com.google.common.eventbus.Subscribe;
 import com.yiguan.core.bases.DomainService;
 import com.yiguan.jigsaw.order.domain.OrderBO;
 import com.yiguan.jigsaw.order.domain.entity.Order;
+import com.yiguan.jigsaw.order.domain.impl.OrderBean;
 import com.yiguan.jigsaw.order.services.argument.OrderCreationReq;
 import com.yiguan.jigsaw.order.services.argument.OrderCreationResp;
 import com.yiguan.jigsaw.order.services.argument.PaymentNotificationReq;
+import com.yiguan.jigsaw.order.services.command.OrderPaidCommand;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactSigned;
 import com.yiguan.jigsaw.order.services.event.emitted.OrderPaid;
@@ -34,23 +36,23 @@ public class OrderService extends DomainService {
   @RequestMapping(value = "notifyOrderPaid", method = RequestMethod.POST)
   public OrderCreationResp notifyOrderPaid(PaymentNotificationReq payment) {
 
-    final OrderPaid orderPaidEvent = mapper.map(payment, OrderPaid.class);
-    final OrderBO orderBO = load(OrderBO.class, payment.getOid());
+    final OrderPaidCommand orderPaidCommand = mapper.map(payment, OrderPaidCommand.class);
+    final OrderBean orderBO = context.getBean(OrderBean.class, orderPaidCommand.getOid());
 
-    orderBO.notifyPaid(orderPaidEvent);
+    orderBO.executeCommand(orderPaidCommand);
 
     return orderBO.into(OrderCreationResp.class);
   }
 
   @Subscribe
   public void onArtifactShippingStarted(ArtifactShippingStarted shippingStarted) {
-    load(OrderBO.class, shippingStarted.getOid())
-        .notifyShippingStarted(shippingStarted);
+    final OrderBean orderBO = context.getBean(OrderBean.class, shippingStarted.getOid());
+    orderBO.sendEvent(shippingStarted);
   }
 
   @Subscribe
   public void onArtifactSignedByCustomer(ArtifactSigned artifactSigned) {
-    load(OrderBO.class, artifactSigned.getOid())
-        .sign(artifactSigned);
+    final OrderBean orderBO = context.getBean(OrderBean.class, artifactSigned.getOid());
+    orderBO.sendEvent(artifactSigned);
   }
 }

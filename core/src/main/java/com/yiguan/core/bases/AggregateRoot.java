@@ -46,10 +46,6 @@ public abstract class AggregateRoot<B extends AggregateRoot<B, E, K>, E extends 
     return mapper.map(internalState, targetType);
   }
 
-  public <T> T map(Object source, Class<T> targetType) {
-    return mapper.map(source, targetType);
-  }
-
   @PostStateChange
   public void onStateChange(LifecycleContext<B, ?> context) {
     internalSave(context.getTarget().internalState);
@@ -58,13 +54,14 @@ public abstract class AggregateRoot<B extends AggregateRoot<B, E, K>, E extends 
   @PostStateChange(priority = 20)
   public void notifyLifecycleEventObservers(LifecycleContext<B, ?> context) {
     lifecycleEventHanlderThreadPool.submit(() -> {
-      eventBus.post(new AppLifecycleEvent(context));
+      final AppLifecycleEvent event = new AppLifecycleEvent(context);
+      eventBus.post(event);
     });
   }
 
-  public abstract E save(E e);
-  public abstract E findOne(K k);
-  public abstract E onStateChanged(E e);
+  protected abstract E save(E e);
+  protected abstract E findOne(K k);
+  protected abstract E onStateChanged(E e);
 
   private void internalSave(E entity) {
     save(entity);

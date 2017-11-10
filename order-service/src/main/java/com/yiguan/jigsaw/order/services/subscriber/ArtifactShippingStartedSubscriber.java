@@ -2,6 +2,7 @@ package com.yiguan.jigsaw.order.services.subscriber;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.eventbus.EventBus;
+import com.yiguan.core.kafka.KafkaMessageConsumer;
 import com.yiguan.core.kafka.message.IMessageHandler;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import lombok.Getter;
@@ -12,14 +13,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArtifactShippingStartedSubscriber implements IMessageHandler {
 
+  public static final String ORDER_ARTIFACT_SHIPPING_STARTED = "Order.ArtifactShippingStarted";
+
   @Autowired
   private EventBus eventBus;
 
-  public void subscribe() {
-    //TODO [Andy] 添加订阅消息逻辑，请盼盼帮忙实现一下
+  public void subscribe(KafkaMessageConsumer kafkaMessageConsumer) {
+    kafkaMessageConsumer.consume(ORDER_ARTIFACT_SHIPPING_STARTED, this);
   }
 
-  public void onMessage(OrderMessage kafkaMessage) {
+  private void onMessage(OrderMessage kafkaMessage) {
     final ArtifactShippingStarted event = populateInboundMessage(kafkaMessage);
     eventBus.post(event);
   }
