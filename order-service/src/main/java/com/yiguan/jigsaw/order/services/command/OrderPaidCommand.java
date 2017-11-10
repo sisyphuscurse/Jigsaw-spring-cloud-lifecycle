@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class OrderPaidCommand implements OrderCommand {
-  private Integer oid;
+  private Long oid;
 
   private String paymentId;
 

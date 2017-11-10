@@ -1,6 +1,7 @@
 package com.yiguan.jigsaw.order.domain.impl;
 
 import com.yiguan.core.bases.AggregateRoot;
+import com.yiguan.core.bases.ConsumedDomainEvent;
 import com.yiguan.jigsaw.order.domain.OrderStatus;
 import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.domain.entity.Payment;
@@ -10,11 +11,11 @@ import com.yiguan.jigsaw.order.domain.fsm.OrderStatusConverter;
 import com.yiguan.jigsaw.order.repositories.OrderRepository;
 import com.yiguan.jigsaw.order.repositories.PaymentRepository;
 import com.yiguan.jigsaw.order.repositories.ShipmentRepository;
+import com.yiguan.jigsaw.order.services.command.CreateOrderCommand;
 import com.yiguan.jigsaw.order.services.command.OrderCommand;
 import com.yiguan.jigsaw.order.services.command.OrderPaidCommand;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactSigned;
-import com.yiguan.core.bases.ConsumedDomainEvent;
 import net.imadz.lifecycle.annotations.Event;
 import net.imadz.lifecycle.annotations.LifecycleMeta;
 import net.imadz.lifecycle.annotations.StateIndicator;
@@ -58,8 +59,8 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> {
   }
 
   @SuppressWarnings("PMD")
-  public OrderBean(Order order) {
-    super(order);
+  public OrderBean(CreateOrderCommand orderCommand) {
+    super(mapper.map(orderCommand, Order.class));
     internalState.setCreateTime(simpleDateFormat.format(new Date()));
   }
 
@@ -80,12 +81,14 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> {
   }
 
   public void executeCommand(OrderCommand command) {
-    switch (command.getClass().getName()) {
+    switch (getClassName(command)) {
       case "CreateOrderCommand":
         save(internalState);
         break;
       case "OrderPaidCommand":
         notifyPaid((OrderPaidCommand) command);
+        break;
+      default:
         break;
     }
   }
@@ -95,37 +98,40 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> {
       case "ArtifactShippingStarted":
         notifyShippingStarted((ArtifactShippingStarted) domainEvent);
         break;
+      default:
+        break;
     }
   }
 
-  private String getClassName(Object obj) {
-    final String name = obj.getClass().getName();
-    final String substring = name.substring(name.lastIndexOf('.') + 1);
-    return substring;
-  }
 
   @Event(value = OrderFSM.Events.OrderPaid.class)
-  private void notifyPaid(OrderPaidCommand orderPaidCommand) {
+  public void notifyPaid(OrderPaidCommand orderPaidCommand) {
     Payment payment = mapper.map(orderPaidCommand, Payment.class);
     internalState.setPayment(payment);
   }
 
   @Event(value = OrderFSM.Events.ShippingStarted.class)
-  private void notifyShippingStarted(ArtifactShippingStarted shippingStartedEvent) {
+  public void notifyShippingStarted(ArtifactShippingStarted shippingStartedEvent) {
     Shipment shipment = mapper.map(shippingStartedEvent, Shipment.class);
     internalState.setShipment(shipment);
   }
 
+  @SuppressWarnings("PMD")
   @Event(value = OrderFSM.Events.SignedByCustomer.class)
-  private void signeture(ArtifactSigned artifactSignedEvent) {
+  public void signeture(ArtifactSigned artifactSignedEvent) {
+    // TODO: 10/11/2017
   }
 
+  @SuppressWarnings("PMD")
   @Event(value = OrderFSM.Events.Accept.class)
-  private void acceptOrder() {
+  public void acceptOrder() {
+    // TODO: 10/11/2017
   }
 
+  @SuppressWarnings("PMD")
   @Event(value = OrderFSM.Events.Cancel.class)
-  private void cancelOrder() {
+  public void cancelOrder() {
+    // TODO: 10/11/2017
   }
 
   @Override

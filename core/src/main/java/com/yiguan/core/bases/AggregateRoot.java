@@ -86,4 +86,11 @@ public abstract class AggregateRoot<B extends AggregateRoot<B, E, K>, E extends 
   private boolean hasSingleLifecycle() {
     return null != getClass().getAnnotation(LifecycleMeta.class);
   }
+
+
+  protected String getClassName(Object obj) {
+    final String name = obj.getClass().getName();
+    final String substring = name.substring(name.lastIndexOf('.') + 1);
+    return substring;
+  }
 }
