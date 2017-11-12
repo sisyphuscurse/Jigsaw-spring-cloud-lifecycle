@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class AggregateRoot<B extends AggregateRoot<B, E, K>, E extends Keyed<K>, K extends Serializable> {
+public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>, K extends Serializable> {
   private static final ExecutorService lifecycleEventHanlderThreadPool = Executors.newFixedThreadPool(4);
   protected static final ModelMapper mapper = new ModelMapper();
   protected E internalState;
@@ -25,13 +25,13 @@ public abstract class AggregateRoot<B extends AggregateRoot<B, E, K>, E extends 
   @Autowired
   private EventBus eventBus;
 
-  protected AggregateRoot(E internalState) {
+  protected Aggregate(E internalState) {
     this.internalState = internalState;
     this.key = Optional.empty();
     this.initializeInitialState();
   }
 
-  protected AggregateRoot(K key) {
+  protected Aggregate(K key) {
     this.key = Optional.of(key);
   }
 

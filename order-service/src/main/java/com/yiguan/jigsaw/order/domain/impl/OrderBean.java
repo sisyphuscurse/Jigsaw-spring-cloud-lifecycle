@@ -1,7 +1,6 @@
 package com.yiguan.jigsaw.order.domain.impl;
 
-import com.yiguan.core.bases.AggregateRoot;
-import com.yiguan.core.bases.ConsumedDomainEvent;
+import com.yiguan.core.bases.Aggregate;
 import com.yiguan.jigsaw.order.domain.OrderStatus;
 import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.domain.entity.Payment;
@@ -12,7 +11,6 @@ import com.yiguan.jigsaw.order.repositories.OrderRepository;
 import com.yiguan.jigsaw.order.repositories.PaymentRepository;
 import com.yiguan.jigsaw.order.repositories.ShipmentRepository;
 import com.yiguan.jigsaw.order.services.command.CreateOrderCommand;
-import com.yiguan.jigsaw.order.services.command.OrderCommand;
 import com.yiguan.jigsaw.order.services.command.OrderPaidCommand;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactShippingStarted;
 import com.yiguan.jigsaw.order.services.event.consumed.ArtifactSigned;
@@ -35,7 +33,7 @@ import java.util.Objects;
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transactional
-public class OrderBean extends AggregateRoot<OrderBean, Order, Long> {
+public class OrderBean extends Aggregate<OrderBean, Order, Long> {
 
   private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
 
@@ -80,29 +78,6 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> {
     this.internalState.setState(stateName);
   }
 
-  public void executeCommand(OrderCommand command) {
-    switch (getClassName(command)) {
-      case "CreateOrderCommand":
-        save(internalState);
-        break;
-      case "OrderPaidCommand":
-        notifyPaid((OrderPaidCommand) command);
-        break;
-      default:
-        break;
-    }
-  }
-
-  public void sendEvent(ConsumedDomainEvent domainEvent) {
-    switch (getClassName(domainEvent)) {
-      case "ArtifactShippingStarted":
-        notifyShippingStarted((ArtifactShippingStarted) domainEvent);
-        break;
-      default:
-        break;
-    }
-  }
-
 
   @Event(value = OrderFSM.Events.OrderPaid.class)
   public void notifyPaid(OrderPaidCommand orderPaidCommand) {
@@ -132,6 +107,10 @@ public class OrderBean extends AggregateRoot<OrderBean, Order, Long> {
   @Event(value = OrderFSM.Events.Cancel.class)
   public void cancelOrder() {
     // TODO: 10/11/2017
+  }
+
+  public void save() {
+    save(internalState);
   }
 
   @Override

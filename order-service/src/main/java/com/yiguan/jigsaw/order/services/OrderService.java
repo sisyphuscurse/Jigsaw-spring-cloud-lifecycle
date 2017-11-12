@@ -27,7 +27,7 @@ public class OrderService extends DomainService {
   public OrderCreationResp createOrder(OrderCreationReq request) {
     final CreateOrderCommand createOrderCommand = mapper.map(request, CreateOrderCommand.class);
     final OrderBean orderBO = context.getBean(OrderBean.class, createOrderCommand);
-    orderBO.executeCommand(createOrderCommand);
+    orderBO.save();
 
     return orderBO.into(OrderCreationResp.class);
   }
@@ -37,7 +37,7 @@ public class OrderService extends DomainService {
     final OrderPaidCommand orderPaidCommand = mapper.map(payment, OrderPaidCommand.class);
     final OrderBean orderBO = context.getBean(OrderBean.class, orderPaidCommand.getOid());
 
-    orderBO.executeCommand(orderPaidCommand);
+    orderBO.notifyPaid(orderPaidCommand);
 
     return orderBO.into(OrderCreationResp.class);
   }
@@ -45,12 +45,12 @@ public class OrderService extends DomainService {
   @Subscribe
   public void onArtifactShippingStarted(ArtifactShippingStarted shippingStarted) {
     final OrderBean orderBO = context.getBean(OrderBean.class, shippingStarted.getOid());
-    orderBO.sendEvent(shippingStarted);
+    orderBO.notifyShippingStarted(shippingStarted);
   }
 
   @Subscribe
   public void onArtifactSignedByCustomer(ArtifactSigned artifactSigned) {
     final OrderBean orderBO = context.getBean(OrderBean.class, artifactSigned.getOid());
-    orderBO.sendEvent(artifactSigned);
+    orderBO.signeture(artifactSigned);
   }
 }
