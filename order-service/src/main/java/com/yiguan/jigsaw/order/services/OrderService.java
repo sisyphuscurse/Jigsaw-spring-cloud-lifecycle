@@ -2,7 +2,8 @@ package com.yiguan.jigsaw.order.services;
 
 import com.google.common.eventbus.Subscribe;
 import com.yiguan.core.bases.DomainService;
-import com.yiguan.jigsaw.order.domain.impl.OrderBean;
+import com.yiguan.jigsaw.order.domain.OrderBO;
+import com.yiguan.jigsaw.order.domain.OrderBean;
 import com.yiguan.jigsaw.order.services.argument.OrderCreationReq;
 import com.yiguan.jigsaw.order.services.argument.OrderCreationResp;
 import com.yiguan.jigsaw.order.services.argument.PaymentNotificationReq;
@@ -23,10 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Transactional
 public class OrderService extends DomainService {
 
+
   @RequestMapping(value = "orders", method = RequestMethod.POST)
   public OrderCreationResp createOrder(OrderCreationReq request) {
     final CreateOrderCommand createOrderCommand = mapper.map(request, CreateOrderCommand.class);
-    final OrderBean orderBO = context.getBean(OrderBean.class, createOrderCommand);
+    final OrderBO orderBO = context.getBean(OrderBO.class, createOrderCommand);
     orderBO.save();
 
     return orderBO.into(OrderCreationResp.class);

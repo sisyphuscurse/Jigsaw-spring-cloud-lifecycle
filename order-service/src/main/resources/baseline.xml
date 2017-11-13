@@ -29,10 +29,10 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="oid" type="int">
+            <column name="oid" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="pid" type="int">
+            <column name="pid" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="name" type="varchar(20)"/>

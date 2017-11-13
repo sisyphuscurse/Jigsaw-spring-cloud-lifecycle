@@ -11,17 +11,14 @@ import net.imadz.lifecycle.annotations.callback.PostStateChange;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>, K extends Serializable> {
+public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>, K extends Serializable> extends Persistable<B, E, K> {
   private static final ExecutorService lifecycleEventHanlderThreadPool = Executors.newFixedThreadPool(4);
   protected static final ModelMapper mapper = new ModelMapper();
-  protected E internalState;
-  private Optional<K> key;
   @Autowired
   private EventBus eventBus;
 
@@ -35,20 +32,13 @@ public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>
     this.key = Optional.of(key);
   }
 
-  @PostConstruct
-  private void initialize() {
-    if (null == internalState) {
-      internalState = findOne(key.get());
-    }
-  }
-
   public <T> T into(Class<T> targetType) {
     return mapper.map(internalState, targetType);
   }
 
   @PostStateChange
   public void onStateChange(LifecycleContext<B, ?> context) {
-    internalSave(context.getTarget().internalState);
+    internalSave(this.internalState);
   }
 
   @PostStateChange(priority = 20)
@@ -57,14 +47,6 @@ public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>
       final AppLifecycleEvent event = new AppLifecycleEvent(context);
       eventBus.post(event);
     });
-  }
-
-  protected abstract E save(E e);
-  protected abstract E findOne(K k);
-
-  private void internalSave(E entity) {
-    save(entity);
-    key = Optional.of(key.orElse(internalState.getKey()));
   }
 
   private void initializeInitialState() {
@@ -84,12 +66,5 @@ public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>
 
   private boolean hasSingleLifecycle() {
     return null != getClass().getAnnotation(LifecycleMeta.class);
-  }
-
-
-  protected String getClassName(Object obj) {
-    final String name = obj.getClass().getName();
-    final String substring = name.substring(name.lastIndexOf('.') + 1);
-    return substring;
   }
 }

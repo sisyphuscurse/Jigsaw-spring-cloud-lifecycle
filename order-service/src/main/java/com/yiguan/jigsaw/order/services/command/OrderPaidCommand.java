@@ -12,9 +12,4 @@ public class OrderPaidCommand implements OrderCommand {
   private String paymentId;
 
   private String paymentTime;
-
-  @Override
-  public String getCommandName() {
-    return OrderPaidCommand.class.getName();
-  }
 }

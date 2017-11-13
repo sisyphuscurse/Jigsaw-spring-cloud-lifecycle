@@ -3,7 +3,7 @@ package com.yiguan.jigsaw.order.services;
 import com.google.common.eventbus.Subscribe;
 import com.yiguan.core.messaging.AppLifecycleEvent;
 import com.yiguan.core.messaging.KafkaClient;
-import com.yiguan.jigsaw.order.domain.impl.OrderBean;
+import com.yiguan.jigsaw.order.domain.OrderBean;
 import com.yiguan.jigsaw.order.services.event.emitted.OrderEmittedEventFactory;
 import com.yiguan.jigsaw.order.services.event.emitted.OrderLifecycleEvent;
 import org.springframework.beans.factory.annotation.Autowired;

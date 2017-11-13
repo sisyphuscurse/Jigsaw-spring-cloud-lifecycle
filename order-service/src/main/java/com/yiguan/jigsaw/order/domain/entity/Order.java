@@ -5,16 +5,18 @@ import com.yiguan.jigsaw.order.domain.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.Version;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -43,15 +45,13 @@ public class Order implements Keyed<Long> {
   @Column(nullable = false)
   private String confirmTime;
 
+
+  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+  private List<OrderItem> items;
+
+
   @Override
   public Long getKey() {
     return id;
   }
-
-
-  @Transient
-  private Payment payment;
-
-  @Transient
-  private Shipment shipment;
 }

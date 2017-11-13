@@ -1,7 +1,7 @@
 package com.yiguan.jigsaw.order.services.event.emitted;
 
 import com.yiguan.jigsaw.order.domain.OrderStatus;
-import com.yiguan.jigsaw.order.domain.impl.OrderBean;
+import com.yiguan.jigsaw.order.domain.OrderBean;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
