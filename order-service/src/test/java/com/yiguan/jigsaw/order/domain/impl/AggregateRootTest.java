@@ -1,6 +1,7 @@
 package com.yiguan.jigsaw.order.domain.impl;
 
 import com.yiguan.core.bases.Aggregate;
+import com.yiguan.core.bases.Persistable;
 import com.yiguan.core.persistence.Keyed;
 import org.springframework.data.repository.CrudRepository;
 
@@ -14,9 +15,9 @@ public class AggregateRootTest {
     try {
       final Aggregate<B, E, K> object = tClass.getConstructor(key.getClass()).newInstance(key);
 
-      injectRepositories(tClass, object, repositories);
+      injectRepositories(tClass.getSuperclass().getSuperclass(), object, repositories);
 
-      final Method initialize = Aggregate.class.getDeclaredMethod("initialize");
+      final Method initialize = Persistable.class.getDeclaredMethod("initialize");
       initialize.setAccessible(true);
       initialize.invoke(object);
       initialize.setAccessible(false);
@@ -26,7 +27,7 @@ public class AggregateRootTest {
     }
   }
 
-  private <B extends Aggregate<B, E, K>, E extends Keyed<K>, K extends Serializable> void injectRepositories(Class<B> tClass, Aggregate<B, E, K> object, CrudRepository[] repositories) throws IllegalAccessException {
+  private <B extends Aggregate<B, E, K>, E extends Keyed<K>, K extends Serializable> void injectRepositories(Class tClass, Aggregate<B, E, K> object, CrudRepository[] repositories) throws IllegalAccessException {
     for (CrudRepository repo : repositories) {
       for (Field field : tClass.getDeclaredFields()) {
         if (field.getType().isAssignableFrom(repo.getClass())) {
