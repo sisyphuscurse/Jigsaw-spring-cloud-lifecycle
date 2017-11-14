@@ -46,13 +46,13 @@ public class OrderService extends DomainService {
 
   @Subscribe
   public void onArtifactShippingStarted(ArtifactShippingStarted shippingStarted) {
-    final OrderBean orderBO = context.getBean(OrderBean.class, shippingStarted.getOid());
+    final OrderBO orderBO = context.getBean(OrderBO.class, shippingStarted.getOid());
     orderBO.notifyShippingStarted(shippingStarted);
   }
 
   @Subscribe
   public void onArtifactSignedByCustomer(ArtifactSigned artifactSigned) {
-    final OrderBean orderBO = context.getBean(OrderBean.class, artifactSigned.getOid());
+    final OrderBO orderBO = context.getBean(OrderBO.class, artifactSigned.getOid());
     orderBO.signature(artifactSigned);
   }
 }
