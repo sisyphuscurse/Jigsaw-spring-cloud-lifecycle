@@ -89,7 +89,7 @@ public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>
     }
   }
 
-  public final B save() {
+  public B save() {
     internalSave(this.internalState);
     postSave();
     return (B) this;

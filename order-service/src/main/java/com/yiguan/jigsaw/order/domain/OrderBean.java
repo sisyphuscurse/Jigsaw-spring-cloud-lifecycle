@@ -3,6 +3,11 @@ package com.yiguan.jigsaw.order.domain;
 import com.yiguan.core.bases.Aggregate;
 import com.yiguan.jigsaw.order.domain.entity.Order;
 import com.yiguan.jigsaw.order.domain.fsm.OrderFSM;
+import com.yiguan.jigsaw.order.domain.fsm.OrderFSM.Events.Accept;
+import com.yiguan.jigsaw.order.domain.fsm.OrderFSM.Events.Cancel;
+import com.yiguan.jigsaw.order.domain.fsm.OrderFSM.Events.OrderPaid;
+import com.yiguan.jigsaw.order.domain.fsm.OrderFSM.Events.ShippingStarted;
+import com.yiguan.jigsaw.order.domain.fsm.OrderFSM.Events.SignedByCustomer;
 import com.yiguan.jigsaw.order.domain.fsm.OrderStatusConverter;
 import com.yiguan.jigsaw.order.services.command.CreateOrderCommand;
 import com.yiguan.jigsaw.order.services.command.OrderPaidCommand;
@@ -25,21 +30,14 @@ import java.util.Locale;
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transactional
-public class OrderBean extends Aggregate<OrderBean, Order, Long>  implements OrderBO {
+public class OrderBean extends Aggregate<OrderBean, Order, Long> implements OrderBO {
 
-  private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
+  private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
 
   @SuppressWarnings("PMD")
-  public OrderBean(CreateOrderCommand orderCommand) {
+  public OrderBean(final CreateOrderCommand orderCommand) {
     super(mapToOrder(orderCommand));
     internalState.setCreateTime(simpleDateFormat.format(new Date()));
-  }
-
-  private static Order mapToOrder(CreateOrderCommand orderCommand) {
-    final Order order = mapper.map(orderCommand, Order.class);
-    order.getItems().stream()
-        .forEach(orderItem -> orderItem.setOrder(order));
-    return order;
   }
 
   public OrderBean(Long oid) {
@@ -57,39 +55,39 @@ public class OrderBean extends Aggregate<OrderBean, Order, Long>  implements Ord
     this.internalState.setState(stateName);
   }
 
-
-  @Event(OrderFSM.Events.OrderPaid.class)
+  @Event(OrderPaid.class)
   public void notifyPaid(OrderPaidCommand orderPaidCommand) {
     internalState.setPaymentId(orderPaidCommand.getPaymentId());
     internalState.setPaymentTime(orderPaidCommand.getPaymentTime());
   }
 
-  @Event(value = OrderFSM.Events.ShippingStarted.class)
+  @Event(value = ShippingStarted.class)
   public void notifyShippingStarted(ArtifactShippingStarted shippingStartedEvent) {
     //Shipment shipment = mapper.map(shippingStartedEvent, Shipment.class);
   }
 
   @SuppressWarnings("PMD")
-  @Event(value = OrderFSM.Events.SignedByCustomer.class)
-  public void signeture(ArtifactSigned artifactSignedEvent) {
+  @Event(value = SignedByCustomer.class)
+  public void signature(ArtifactSigned artifactSignedEvent) {
     // TODO: 10/11/2017
   }
 
   @SuppressWarnings("PMD")
-  @Event(value = OrderFSM.Events.Accept.class)
+  @Event(value = Accept.class)
   public void acceptOrder() {
     // TODO: 10/11/2017
   }
 
   @SuppressWarnings("PMD")
-  @Event(value = OrderFSM.Events.Cancel.class)
+  @Event(value = Cancel.class)
   public void cancelOrder() {
     // TODO: 10/11/2017
   }
 
-  @Override
-  protected Order findOne(Long id) {
-    final Order order = repository.findOne(id);
+  private static Order mapToOrder(final CreateOrderCommand orderCommand) {
+    final Order order = mapper.map(orderCommand, Order.class);
+    order.getItems().stream()
+        .forEach(orderItem -> orderItem.setOrder(order));
     return order;
   }
 

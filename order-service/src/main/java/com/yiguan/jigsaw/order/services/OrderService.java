@@ -28,10 +28,10 @@ public class OrderService extends DomainService {
   @RequestMapping(value = "orders", method = RequestMethod.POST)
   public OrderCreationResp createOrder(OrderCreationReq request) {
     final CreateOrderCommand createOrderCommand = mapper.map(request, CreateOrderCommand.class);
-    final OrderBO orderBO = context.getBean(OrderBO.class, createOrderCommand);
-    orderBO.save();
 
-    return orderBO.into(OrderCreationResp.class);
+    return create(OrderBO.class, createOrderCommand)
+        .save()
+        .into(OrderCreationResp.class);
   }
 
   @RequestMapping(value = "notifyOrderPaid", method = RequestMethod.POST)
@@ -53,6 +53,6 @@ public class OrderService extends DomainService {
   @Subscribe
   public void onArtifactSignedByCustomer(ArtifactSigned artifactSigned) {
     final OrderBean orderBO = context.getBean(OrderBean.class, artifactSigned.getOid());
-    orderBO.signeture(artifactSigned);
+    orderBO.signature(artifactSigned);
   }
 }
