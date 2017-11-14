@@ -60,7 +60,8 @@ public class OrderBean extends Aggregate<OrderBean, Order, Long>  implements Ord
 
   @Event(OrderFSM.Events.OrderPaid.class)
   public void notifyPaid(OrderPaidCommand orderPaidCommand) {
-    //Payment payment = mapper.map(orderPaidCommand, Payment.class);
+    internalState.setPaymentId(orderPaidCommand.getPaymentId());
+    internalState.setPaymentTime(orderPaidCommand.getPaymentTime());
   }
 
   @Event(value = OrderFSM.Events.ShippingStarted.class)

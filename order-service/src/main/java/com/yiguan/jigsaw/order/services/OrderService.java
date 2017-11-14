@@ -37,7 +37,7 @@ public class OrderService extends DomainService {
   @RequestMapping(value = "notifyOrderPaid", method = RequestMethod.POST)
   public OrderCreationResp notifyOrderPaid(PaymentNotificationReq payment) {
     final OrderPaidCommand orderPaidCommand = mapper.map(payment, OrderPaidCommand.class);
-    final OrderBean orderBO = context.getBean(OrderBean.class, orderPaidCommand.getOid());
+    final OrderBO orderBO = context.getBean(OrderBO.class, orderPaidCommand.getOid());
 
     orderBO.notifyPaid(orderPaidCommand);
 

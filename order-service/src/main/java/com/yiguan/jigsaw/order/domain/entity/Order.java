@@ -42,13 +42,26 @@ public class Order implements Keyed<Long> {
   @Enumerated(EnumType.STRING)
   private OrderStatus state;
 
-  @Column(nullable = false)
+  @Column
   private String confirmTime;
 
+  @Column(name = "payment_id")
+  private String paymentId;
+
+  @Column(name = "payment_time")
+  private String paymentTime;
+
+  @Column(name = "shipping_id")
+  private String shippingId;
+
+  @Column(name = "shipping_time")
+  private String shippingTime;
+
+  @Column(name = "received_time")
+  private String receivedTime;
 
   @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
   private List<OrderItem> items;
-
 
   @Override
   public Long getKey() {

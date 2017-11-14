@@ -21,6 +21,12 @@
                 <constraints nullable="true"/>
             </column>
             <column name="state" type="varchar(20)"/>
+            <column name="payment_id" type="varchar(50)"/>
+            <column name="payment_time" type="varchar(20)"/>
+            <column name="shipping_id" type="varchar(50)"/>
+            <column name="shipping_time" type="varchar(20)"/>
+            <column name="received_time" type="varchar(20)"/>
+            <column name="confirm_time" type="varchar(20)"/>
         </createTable>
     </changeSet>
 
@@ -40,69 +46,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="amount" type="int">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="create payments table" author="Leo">
-        <createTable tableName="payments">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="oid" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="payment_id" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="payment_time" type="varchar(20)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="create shipments table" author="Leo">
-        <createTable tableName="shipments">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="oid" type="bigint">
-                <constraints nullable="false"/>
-            </column>
-            <column name="shipping_id" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="shipping_time" type="varchar(20)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-
-    <changeSet id="add column to shipments table" author="Leo">
-        <addColumn tableName="shipments">
-            <column name="received_time" type="varchar(20)"/>
-        </addColumn>
-    </changeSet>
-
-    <changeSet id="add column to orders table" author="Leo">
-        <addColumn tableName="orders">
-            <column name="confirm_time" type="varchar(20)"/>
-        </addColumn>
-    </changeSet>
-
-    <changeSet id="create order_cancellation table" author="Leo">
-        <createTable tableName="order_cancellation">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="oid" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="reason" type="varchar(50)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="created_time" type="varchar(20)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
