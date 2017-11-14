@@ -10,19 +10,18 @@ import net.imadz.lifecycle.annotations.ReactiveObject;
 import net.imadz.lifecycle.annotations.callback.PostStateChange;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.CrudRepository;
 
-import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>, K extends Serializable>  {
+public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>, K extends Serializable> extends Persistable<B, E, K> {
   private static final ExecutorService lifecycleEventHanlderThreadPool = Executors.newFixedThreadPool(4);
   protected static final ModelMapper mapper = new ModelMapper();
   @Autowired
   private EventBus eventBus;
+
 
   protected Aggregate(E internalState) {
     this.internalState = internalState;
@@ -69,42 +68,4 @@ public abstract class Aggregate<B extends Aggregate<B, E, K>, E extends Keyed<K>
   private boolean hasSingleLifecycle() {
     return null != getClass().getAnnotation(LifecycleMeta.class);
   }
-
-
-  protected Optional<K> key;
-
-  protected E internalState;
-
-  @Autowired
-  public void setRepository(CrudRepository<E, K> repository) {
-    this.repository = repository;
-  }
-
-  protected CrudRepository<E, K> repository;
-
-  @PostConstruct
-  private void initialize() {
-    if (null == internalState) {
-      internalState = findOne(key.get());
-    }
-  }
-
-  public B save() {
-    internalSave(this.internalState);
-    postSave();
-    return (B) this;
-  }
-
-  protected void postSave() {
-  }
-
-  protected E findOne(K k){
-    return repository.findOne(k);
-  }
-
-  protected void internalSave(E entity) {
-    repository.save(entity);
-    key = Optional.of(key.orElse(internalState.getKey()));
-  }
-
 }

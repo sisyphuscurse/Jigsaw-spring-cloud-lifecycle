@@ -2,6 +2,7 @@ package com.yiguan.jigsaw.order.domain;
 
 import com.yiguan.core.bases.Aggregate;
 import com.yiguan.jigsaw.order.domain.entity.Order;
+import com.yiguan.jigsaw.order.domain.entity.Payment;
 import com.yiguan.jigsaw.order.domain.fsm.OrderFSM;
 import com.yiguan.jigsaw.order.domain.fsm.OrderFSM.Events.Accept;
 import com.yiguan.jigsaw.order.domain.fsm.OrderFSM.Events.Cancel;
@@ -57,13 +58,13 @@ public class OrderBean extends Aggregate<OrderBean, Order, Long> implements Orde
 
   @Event(OrderPaid.class)
   public void notifyPaid(OrderPaidCommand orderPaidCommand) {
-    internalState.setPaymentId(orderPaidCommand.getPaymentId());
-    internalState.setPaymentTime(orderPaidCommand.getPaymentTime());
+    internalState.setPayment(new Payment(orderPaidCommand.getPaymentId(),orderPaidCommand.getPaymentTime()));
   }
 
   @Event(value = ShippingStarted.class)
   public void notifyShippingStarted(ArtifactShippingStarted shippingStartedEvent) {
-    //Shipment shipment = mapper.map(shippingStartedEvent, Shipment.class);
+    internalState.setShippingId(shippingStartedEvent.getShippingId());
+    internalState.setShippingTime(shippingStartedEvent.getShippingTime());
   }
 
   @SuppressWarnings("PMD")

@@ -45,11 +45,7 @@ public class Order implements Keyed<Long> {
   @Column
   private String confirmTime;
 
-  @Column(name = "payment_id")
-  private String paymentId;
-
-  @Column(name = "payment_time")
-  private String paymentTime;
+  private Payment payment;
 
   @Column(name = "shipping_id")
   private String shippingId;
