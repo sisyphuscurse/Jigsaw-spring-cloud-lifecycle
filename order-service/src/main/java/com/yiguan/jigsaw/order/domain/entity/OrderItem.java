@@ -3,6 +3,7 @@ package com.yiguan.jigsaw.order.domain.entity;
 import com.yiguan.core.persistence.Keyed;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderItem implements Keyed<Long> {
   @Id
   @GeneratedValue

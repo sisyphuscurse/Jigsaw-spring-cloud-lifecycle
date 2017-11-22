@@ -21,7 +21,6 @@ import net.imadz.lifecycle.annotations.state.Converter;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,8 +29,7 @@ import java.util.Locale;
 @LifecycleMeta(OrderFSM.class)
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Transactional
-public class OrderBean extends Aggregate<OrderBean, Order, Long> implements OrderBO {
+public class OrderBean extends Aggregate<OrderBean, Order, Long> {
 
   private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.CHINA);
 
@@ -58,7 +56,7 @@ public class OrderBean extends Aggregate<OrderBean, Order, Long> implements Orde
 
   @Event(OrderPaid.class)
   public void notifyPaid(OrderPaidCommand orderPaidCommand) {
-    internalState.setPayment(new Payment(orderPaidCommand.getPaymentId(),orderPaidCommand.getPaymentTime()));
+    internalState.setPayment(new Payment(orderPaidCommand.getPaymentId(), orderPaidCommand.getPaymentTime()));
   }
 
   @Event(value = ShippingStarted.class)

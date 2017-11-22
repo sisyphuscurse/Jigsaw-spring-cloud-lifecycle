@@ -29,9 +29,9 @@ public class OrderService extends DomainService {
   public OrderCreationResp createOrder(OrderCreationReq request) {
     final CreateOrderCommand createOrderCommand = mapper.map(request, CreateOrderCommand.class);
 
-    return create(OrderBO.class, createOrderCommand)
-        .save()
-        .into(OrderCreationResp.class);
+    final OrderBean orderBO = context.getBean(OrderBean.class, createOrderCommand);
+
+    return orderBO.save().into(OrderCreationResp.class);
   }
 
   @RequestMapping(value = "notifyOrderPaid", method = RequestMethod.POST)
