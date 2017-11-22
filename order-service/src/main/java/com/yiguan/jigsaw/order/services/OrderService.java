@@ -2,7 +2,6 @@ package com.yiguan.jigsaw.order.services;
 
 import com.google.common.eventbus.Subscribe;
 import com.yiguan.core.bases.DomainService;
-import com.yiguan.jigsaw.order.domain.OrderBO;
 import com.yiguan.jigsaw.order.domain.OrderBean;
 import com.yiguan.jigsaw.order.services.argument.OrderCreationReq;
 import com.yiguan.jigsaw.order.services.argument.OrderCreationResp;
@@ -37,7 +36,7 @@ public class OrderService extends DomainService {
   @RequestMapping(value = "notifyOrderPaid", method = RequestMethod.POST)
   public OrderCreationResp notifyOrderPaid(PaymentNotificationReq payment) {
     final OrderPaidCommand orderPaidCommand = mapper.map(payment, OrderPaidCommand.class);
-    final OrderBO orderBO = context.getBean(OrderBO.class, orderPaidCommand.getOid());
+    final OrderBean orderBO = context.getBean(OrderBean.class, orderPaidCommand.getOid());
 
     orderBO.notifyPaid(orderPaidCommand);
 
@@ -46,13 +45,13 @@ public class OrderService extends DomainService {
 
   @Subscribe
   public void onArtifactShippingStarted(ArtifactShippingStarted shippingStarted) {
-    final OrderBO orderBO = context.getBean(OrderBO.class, shippingStarted.getOid());
+    final OrderBean orderBO = context.getBean(OrderBean.class, shippingStarted.getOid());
     orderBO.notifyShippingStarted(shippingStarted);
   }
 
   @Subscribe
   public void onArtifactSignedByCustomer(ArtifactSigned artifactSigned) {
-    final OrderBO orderBO = context.getBean(OrderBO.class, artifactSigned.getOid());
+    final OrderBean orderBO = context.getBean(OrderBean.class, artifactSigned.getOid());
     orderBO.signature(artifactSigned);
   }
 }
