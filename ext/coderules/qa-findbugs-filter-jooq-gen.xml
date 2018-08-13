@@ -1,11 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FindBugsFilter>
-  <Match>
-    <Package name="~com\.yiguanjinrong\.faceoff\.gen\.*"/>
-    <Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS"/>
-  </Match>
-  <Match>
-    <Package name="~com\.yiguanjinrong\.faceoff\.gen\.tables\.*"/>
-    <Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS"/>
-  </Match>
 </FindBugsFilter>

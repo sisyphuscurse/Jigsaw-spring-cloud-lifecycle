@@ -141,15 +141,9 @@
       </plugin>
       <!--code analysis start-->
       <!-- code coverage check-->
-      <!-- http://10.232.128.160:9000/project/settings?category=exclusions&id=com.yiguanjinrong%3Aface-off -->
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>**/com/yiguanjinrong/something/*</exclude>
-          </excludes>
-        </configuration>
         <executions>
           <execution>
             <id>pre-test</id>
