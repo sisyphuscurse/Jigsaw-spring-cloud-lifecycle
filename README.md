@@ -2,10 +2,11 @@
 该项目旨在利用Spring Cloud + Lifecycle + JPA技术栈给出偏向领域微服务的
 
 ## 运行/调试程序之前的准备
-###启动服务依赖容器
+### 启动服务依赖容器
 在工程目录下执行
-
+```
     docker-compose up
+```
 
 ### 配置IntelliJ 启动 Order Service
 
