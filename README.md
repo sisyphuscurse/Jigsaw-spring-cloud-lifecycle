@@ -7,7 +7,7 @@
 
     docker-compose up
 
-###配置IntelliJ 启动 Order Service
+### 配置IntelliJ 启动 Order Service
 
 如下图所示，需要在Before Launch对话框内移除"Build"并且添加Maven任务clean package
 ![环境设置](ext/guides/configure_run_order_service.png)
